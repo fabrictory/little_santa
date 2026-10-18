@@ -107,7 +107,7 @@ footer{font-size:13px;color:var(--muted);text-align:center}
 
   <article class="story">
     <h2>리틀산타의 곁을 지켜줄 산타를 찾습니다</h2>
-    <p>크리스마스는 아기 예수님의 탄생을 축하하며, 받은 사랑을 나누는 날입니다. 약 1,700년 전 성 니콜라스는 가난한 이웃의 집에 밤마다 몰래 금주머니를 넣어 주었고, 이 이야기가 오늘날의 산타클로스가 되었습니다.</p>
+    <p>크리스마스는 아기 예수님의 탄생을 축하하며, 받은 사랑을 나누는 날입니다. 약 1,700년 전 성 니콜라스는 예수님께 받은 사랑을 흘려보내며, 가난한 이웃의 집에 밤마다 몰래 금주머니를 넣어 주었다고 전해집니다. 이 이야기가 오늘날의 산타클로스가 되었습니다.</p>
     <p>리틀산타 재능마켓에서는 아이들이 자신의 재능을 선물로 꺼내 이웃에게 건넵니다. 그 곁에서 이름 없이, 묵묵히 손을 보태 줄 또 한 명의 산타가 되어 주세요.</p>
   </article>
 
@@ -120,7 +120,7 @@ footer{font-size:13px;color:var(--muted);text-align:center}
     <h2>언제, 어디서 열리나요?</h2>
     <ul class="plain">
       <li><b>일시</b> 2026년 12월 12일(토) · 1부 11:00~13:00 / 2부 15:00~17:00</li>
-      <li>모든 스텝은 행사 전 <b>세팅</b> 또는 행사 후 <b>철수</b> 중 한 가지 이상에 꼭 함께해 주셔야 합니다. 정확한 집결 시간은 확정 안내 때 알려드립니다.</li>
+      <li>모든 스텝은 <b>1부와 2부 모두</b> 함께하며, 행사 전 <b>세팅</b> 또는 행사 후 <b>철수</b> 중 한 가지 이상에 꼭 함께해 주셔야 합니다. 정확한 집결 시간은 확정 안내 때 알려드립니다.</li>
       <li><b>장소</b> 확정 후 안내</li>
     </ul>
   </section>
@@ -200,8 +200,9 @@ footer{font-size:13px;color:var(--muted);text-align:center}
           <div class="field"><label class="req" for="r1">1지망 역할</label><select id="r1"></select></div>
           <div class="field"><label for="r2">2지망 역할</label><select id="r2"></select></div>
         </div>
-        <fieldset class="checks"><legend class="req">참여할 수 있는 시간 <span class="hint">(선택한 시간은 처음부터 끝까지 있을 수 있어야 해요)</span></legend>
-          <div id="timeList" class="checks"></div>
+        <fieldset class="checks"><legend class="req">행사 당일 참여</legend>
+          <label><input type="checkbox" id="both-ok"> 1부(11:00~13:00)와 2부(15:00~17:00)에 모두 참여합니다.</label>
+          <p class="hint">모든 스텝은 1부와 2부를 모두 함께합니다.</p>
         </fieldset>
         <fieldset class="checks"><legend class="req">세팅·철수 참여 <span class="hint">(모든 스텝 필수 · 한 가지 이상 선택)</span></legend>
           <div id="setupList" class="checks"></div>
@@ -299,9 +300,9 @@ const CFG = {
     { id: 'safety', name: '안전 지킴이', tag: '안전', when: '1부·2부', f: '부', where: '계단, 출입구, 스포츠존 주변', need: '부당 2명',
       tasks: ['계단·출입구에서 뛰는 아이 살피기', '보호자를 잃은 아이가 생기면 인포로 연결하고 안내 요청', '응급처치 키트 위치를 익히고 다친 아이를 운영진에게 연결'],
       fit: '차분하고 상황 판단이 빠른 분, 응급처치 교육 이수자 환영' },
-    { id: 'record', name: '기록 엘프', tag: '사진·영상', when: '종일', f: '종일', where: '1·2층 전체', need: '1~2명',
-      tasks: ['행사 공식 사진·영상 촬영', '촬영 비동의 아동 목록을 받아 해당 아이는 얼굴이 나오지 않게 촬영', '촬영본은 당일 패브릭토리에 전달하고 개인 보관·게시하지 않기'],
-      fit: '카메라를 다룰 줄 아는 분 (장비 지참 가능하면 좋아요)' },
+    { id: 'record', name: '기록 엘프', tag: 'SNS 사진·영상', when: '1부·2부', f: '부', where: '1·2층 전체', need: '1~2명',
+      tasks: ['행사 공식 사진·영상은 사진작가님이 따로 촬영합니다', '기록 엘프는 SNS에 올릴 현장 사진과 짧은 영상을 휴대폰으로 찍습니다', '촬영 비동의 아동 목록을 받아 해당 아이는 얼굴이 나오지 않게 촬영', '촬영본은 당일 패브릭토리에 전달하고 개인 보관·게시하지 않기'],
+      fit: '휴대폰으로 사진·영상 찍기를 좋아하는 분, SNS용 짧은 영상에 익숙한 분' },
   ],
 
   scenario: {
@@ -324,19 +325,15 @@ CFG.agreements = [
   { id: 'training', title: '온라인 사전 교육에 참여하겠습니다',
     body: '사전 교육에서 리틀산타 이야기, 아이를 대하는 원칙, 역할별 동선을 익힙니다. 교육에 참석하지 않으면 배정이 취소됩니다.' },
   { id: 'full', title: '행사 당일 정해진 시간 동안 끝까지 함께하겠습니다',
-    body: '시작 30분 전에 도착하고, 배정된 시간 중간에 자리를 비우거나 먼저 떠나지 않습니다. 아이들은 스텝이 있다는 전제로 자기 자리를 지킵니다.' },
+    body: '1부와 2부 모두 참여하며, 시작 30분 전에 도착하고, 중간에 자리를 비우거나 먼저 떠나지 않습니다. 아이들은 스텝이 있다는 전제로 자기 자리를 지킵니다.' },
   { id: 'confirm', title: '배정 안내를 받으면 ' + CFG.confirmDays + '일 안에 확정 회신합니다',
     body: '기한 안에 회신이 없으면 대기자에게 자리가 넘어갑니다.' },
   { id: 'cancel', title: '못 오게 되면 행사 ' + CFG.cancelNoticeDays + '일 전까지 알립니다',
     body: '그래야 대기자를 배정하고 아이들 곁을 비우지 않을 수 있습니다. 연락 없이 불참하면 다음 회차 스텝 모집에서 제외됩니다.' },
-  { id: 'child', title: '아이가 주인공입니다',
-    body: '아이의 재능 선물을 대신 만들지 않고, 잘하고 못하고를 평가하거나 다른 아이와 비교하지 않습니다. 아이와 단둘이 있지 않고 스텝 2인 1조로 움직입니다.' },
   { id: 'photo', title: '행사 중 알게 된 아이들과 가족의 정보를 외부에 공유하지 않습니다',
     body: '행사 중 찍은 아이들 사진과 영상, 아이와 가족에 대해 알게 된 정보를 개인 SNS나 메신저에 올리거나 전하지 않습니다.' },
   { id: 'record', title: '행사 기록용 사진·영상 촬영에 동의합니다',
     body: '스텝 활동 모습이 행사 기록 사진과 영상에 담길 수 있습니다. 기록물은 리틀산타와 패브릭토리의 활동 소개에 쓰입니다.' },
-  { id: 'check', title: '성범죄경력 조회에 동의합니다',
-    body: '아이들과 직접 만나는 활동이므로, 배정이 확정되면 본인 동의서를 받아 조회합니다. 조회 방법은 확정 안내 때 알려드립니다.' },
   { id: 'privacy', title: '개인정보 수집·이용에 동의합니다',
     body: '수집 항목: 이름, 연락처, 이메일, 나이 구분, 거주 지역, 지원서에 쓴 내용. 이용 목적: 스텝 선정, 배정 안내, 사전 교육과 행사 당일 연락. 보유 기간: ' +
       CFG.dataRetention + ' 뒤 파기. 동의하지 않을 수 있으나, 동의하지 않으면 지원할 수 없습니다.' }
@@ -388,11 +385,7 @@ $('roleList').addEventListener('click', e => {
   $('apply').scrollIntoView({behavior:'smooth'});
 });
 
-const timeLabel = k => CFG.sessionTimes[k] ? k + ' (' + CFG.sessionTimes[k] + ')' : k;
-const times = ['11월 준비 기간 (산타 멘토)', '1부', '2부'];
 const setupTimes = ['행사 전 세팅', '행사 후 철수'];
-$('timeList').innerHTML = times.map((t, i) =>
-  '<label><input type="checkbox" name="time" id="time-' + i + '" value="' + esc(t) + '"> ' + esc(CFG.sessionTimes[t] !== undefined ? timeLabel(t) : t) + '</label>').join('');
 $('setupList').innerHTML = setupTimes.map((t, i) =>
   '<label><input type="checkbox" name="setup" id="setup-' + i + '" value="' + esc(t) + '"> ' + esc(t) + '</label>').join('');
 
@@ -454,7 +447,7 @@ $('f').addEventListener('submit', e => {
     name: val('name'), phone: val('phone'), email: val('email'), region: val('region'),
     age: $('age-ok').checked ? '성인 (만 19세 이상)' : '',
     role1: roleName($('r1').value), role2: roleName($('r2').value),
-    times: checked('time').concat(checked('setup')), setupCount: checked('setup').length, trainings: checked('training'), route: checked('route')[0] || '',
+    times: ($('both-ok').checked ? ['1부', '2부'] : []).concat(checked('setup')), setupCount: checked('setup').length, trainings: checked('training'), route: checked('route')[0] || '',
     motive: val('motive'), scenario: checked('scenario')[0] || '', skill: val('skill'), message: val('message'),
     agreedAll: Object.values(agreed).every(Boolean), agreedCount: Object.keys(agreed).length,
     website: val('website')
@@ -469,7 +462,7 @@ $('f').addEventListener('submit', e => {
   need(/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email), $('email'), '이메일 주소를 확인해 주세요. 접수 확인 메일이 이 주소로 갑니다.');
   need(data.age, fsOf('age-ok'), '만 19세 이상인 분만 지원할 수 있습니다. 확인란에 체크해 주세요.');
   need(data.role1, $('r1'), '1지망 역할을 골라 주세요.');
-  need(checked('time').length, fsOf('timeList'), '참여할 수 있는 시간을 하나 이상 골라 주세요.');
+  need($('both-ok').checked, fsOf('both-ok'), '1부와 2부 모두 참여하는 것이 스텝 지원 조건입니다. 확인란에 체크해 주세요.');
   need(data.setupCount > 0, fsOf('setupList'), '세팅과 철수 중 한 가지 이상을 꼭 골라 주세요.');
   if (CFG.trainingDates.length) need(data.trainings.length, $('trainingSet'), '참석할 수 있는 사전 교육 일정을 골라 주세요.');
   need(data.motive.length >= 30, $('motive'), '지금 ' + data.motive.length + '자입니다. 30자 이상 적어 주세요.');
