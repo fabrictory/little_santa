@@ -1,186 +1,507 @@
-// 2026 리틀산타 스텝 지원 · 접수 창구 (Google Apps Script)
-// GitHub에 올린 지원 페이지(index.html)가 지원서를 이 스크립트로 보내면,
-// 이 스크립트가 구글 시트 '지원자' 탭에 한 줄씩 기록합니다.
-// 처음 한 번: 함수 목록에서 setup 을 골라 [실행] → 권한 허용
-// 배포: [배포] → [새 배포] → 웹 앱 / 실행 사용자 '나' / 액세스 권한 '모든 사용자'
-// 고친 뒤: [배포] → [배포 관리] → 연필 → 버전 '새 버전' → [배포]  (주소가 바뀌지 않습니다)
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026 리틀산타 스텝 모집</title>
+<meta name="description" content="아이들이 재능을 선물하는 리틀산타 재능마켓, 곁에서 함께할 자원 스텝을 찾습니다.">
+<meta property="og:title" content="2026 리틀산타 스텝 모집">
+<meta property="og:description" content="아이들이 재능을 선물하는 리틀산타 재능마켓, 곁에서 함께할 자원 스텝을 찾습니다.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap">
+<style>
+:root{
+  --paper:#fbf6ea; --card:#fffdf7; --ink:#3a2a26; --muted:#7a6660;
+  --red:#c8323c; --pink:#e88a98; --olive:#5f6b3a; --line:#ead9c9; --tint:#f7e6df;
+  --display:"Jua","Gowun Dodum",system-ui,sans-serif;
+  --body:"Gowun Dodum","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root{
+  --paper:#1f1a19; --card:#2a2321; --ink:#f3e9df; --muted:#bfaea6;
+  --red:#ef6670; --pink:#d97f8d; --olive:#a9b67a; --line:#4a3d39; --tint:#3a2b2a; color-scheme:dark}}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.7}
+.stripe{height:14px;background:repeating-linear-gradient(90deg,var(--red) 0 18px,var(--pink) 18px 36px)}
+.wrap{max-width:880px;margin:0 auto;display:grid;gap:40px;padding:36px max(16px,env(safe-area-inset-right,0px)) 48px max(16px,env(safe-area-inset-left,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0;line-height:1.3}
+h1{font-size:clamp(30px,6vw,44px);color:var(--red)}
+h2{font-size:24px} h3{font-size:19px}
+p{margin:0;max-width:65ch}
+.eyebrow{font-size:13px;letter-spacing:.08em;color:var(--olive)}
+header{display:grid;gap:12px}
+.lead{font-size:17px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:15px}
+.facts b{color:var(--red);font-weight:400;font-family:var(--display);margin-right:6px}
+.promise{border:2px dashed var(--pink);border-radius:14px;padding:18px 20px;background:var(--card);display:grid;gap:8px}
+.promise strong{color:var(--red)}
+.story{display:grid;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px max(18px,4%)}
+.story section{gap:10px}
+.story h2{color:var(--red)}
+.story p{font-size:17px;line-height:1.85}
+ul.plain{margin:0;padding-left:20px;display:grid;gap:6px}
+ul.plain b{font-family:var(--display);font-weight:400;color:var(--red);margin-right:6px}
+.closed{border:2px solid var(--red);border-radius:14px;padding:18px 20px;background:var(--tint)}
+section{display:grid;gap:16px}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;min-width:0}
+.box ul{margin:6px 0 0;padding-left:20px}
+.yes h3{color:var(--olive)} .no h3{color:var(--red)}
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:inherit;font-size:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:4px 14px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:#fff}
+.roles{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.role{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:10px;align-content:start;min-width:0}
+.role .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.tag{font-size:12px;border-radius:999px;padding:1px 10px;background:var(--tint);white-space:nowrap}
+.meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--muted)}
+.role ul{margin:0;padding-left:18px;font-size:15px}
+.fit{font-size:14px;color:var(--olive)}
+.btn{font:inherit;font-family:var(--display);font-size:16px;border:0;border-radius:10px;padding:8px 14px;cursor:pointer;background:var(--red);color:#fff;justify-self:start}
+.btn[disabled]{opacity:.6;cursor:wait}
+:focus-visible{outline:3px solid var(--olive);outline-offset:2px}
+.steps{display:grid;gap:0;padding:0;margin:0}
+.steps li{list-style:none;display:grid;grid-template-columns:150px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.steps b{font-family:var(--display);font-weight:400;color:var(--red)}
+@media (max-width:480px){.steps li{grid-template-columns:1fr;gap:2px}}
+form{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:22px;display:grid;gap:22px}
+.part{display:grid;gap:16px;padding-top:6px}
+.part + .part{border-top:1px dashed var(--line);padding-top:22px}
+.field{display:grid;gap:6px;min-width:0}
+label,legend{font-weight:700;font-size:15px}
+.req::after{content:" *";color:var(--red)}
+fieldset{border:0;padding:0;margin:0;display:grid;gap:6px;min-width:0}
+input[type=text],input[type=tel],input[type=email],select,textarea{font:inherit;width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink)}
+.checks label{font-weight:400;display:flex;gap:8px;align-items:flex-start}
+.checks input{margin-top:6px;flex:none}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.hint{font-size:13px;color:var(--muted);font-weight:400}
+.count{font-size:13px;color:var(--muted);justify-self:end}
+.agree{display:grid;gap:10px}
+.ag{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--paper)}
+.ag label{font-weight:700;display:flex;gap:10px;align-items:flex-start}
+.ag input{margin-top:6px;flex:none;width:18px;height:18px}
+.ag p{font-size:14px;color:var(--muted);margin:4px 0 0 28px}
+.allrow{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.linkbtn{font:inherit;font-size:14px;background:none;border:1px solid var(--line);border-radius:8px;padding:4px 10px;color:var(--ink);cursor:pointer}
+.invalid{outline:2px solid var(--red);outline-offset:4px;border-radius:8px}
+input.invalid,select.invalid,textarea.invalid{outline:0;border-color:var(--red);box-shadow:0 0 0 2px var(--red)}
+.ag.invalid{border-color:var(--red)}
+.ferr{color:var(--red);font-size:14px;font-weight:700;margin:4px 0 0}
+.err{color:var(--red);font-size:15px}
+.done{border:2px solid var(--olive);border-radius:16px;padding:22px;background:var(--card);display:grid;gap:10px}
+.done .no{font-family:var(--display);font-size:28px;color:var(--red)}
+footer{font-size:13px;color:var(--muted);text-align:center}
+</style>
+</head>
+<body>
+<div class="stripe" aria-hidden="true"></div>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">LITTLE SANTA MARKET 2026 · 스텝 모집</div>
+    <h1>2026 리틀산타 재능마켓 스텝 모집</h1>
+    <div class="facts" id="facts"></div>
+  </header>
 
-const CONFIG = {
+  <div class="closed" id="closedBox" hidden><h2>스텝 모집이 마감되었습니다</h2><p>관심 가져 주셔서 고맙습니다. 다음 리틀산타에서 만나요.</p></div>
+
+  <article class="story">
+    <h2>리틀산타의 곁을 지켜줄 산타를 찾습니다</h2>
+    <p>크리스마스는 아기 예수님의 탄생을 축하하며, 받은 사랑을 나누는 날입니다. 약 1,700년 전 성 니콜라스는 예수님께 받은 사랑을 흘려보내며, 가난한 이웃의 집에 밤마다 몰래 금주머니를 넣어 주었다고 전해집니다. 이 이야기가 오늘날의 산타클로스가 되었습니다.</p>
+    <p>리틀산타 재능마켓에서는 아이들이 자신의 재능을 선물로 꺼내 이웃에게 건넵니다. 그 곁에서 이름 없이, 묵묵히 손을 보태 줄 또 한 명의 산타가 되어 주세요.</p>
+  </article>
+
+  <div class="promise">
+    <h2>꼭 알아주세요</h2>
+    <p>이번 리틀산타 스텝은 <strong>자원봉사</strong>로 함께합니다. 행사 수익은 <strong>실비를 제외한 전액</strong>을 기부하며, 기부에는 스텝의 이름 대신 <strong>아이들의 이름만</strong> 담아 전합니다. 니콜라스가 그랬듯, 이름 없이 건네는 선물이 되기를 바랍니다.</p>
+  </div>
+
+  <section>
+    <h2>언제, 어디서 열리나요?</h2>
+    <ul class="plain">
+      <li><b>일시</b> 2026년 12월 12일(토) · 1부 11:00~13:00 / 2부 15:00~17:00</li>
+      <li>모든 스텝은 <b>1부와 2부 모두</b> 함께하며, 행사 전 <b>세팅</b> 또는 행사 후 <b>철수</b> 중 한 가지 이상에 꼭 함께해 주셔야 합니다. 정확한 집결 시간은 확정 안내 때 알려드립니다.</li>
+      <li><b>장소</b> 확정 후 안내</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>누가 지원할 수 있나요?</h2>
+    <ul class="plain">
+      <li>성인이라면 누구나 지원할 수 있습니다. (청소년 제외)</li>
+      <li>아이들을 존중하는 마음으로, 사전 교육부터 행사 당일까지 끝까지 함께해 주실 분을 찾습니다.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>어떻게 진행되나요?</h2>
+    <ol class="steps" id="scheduleList"></ol>
+    <p class="hint" id="contactLine"></p>
+  </section>
+
+  <section>
+    <h2>스텝은 무엇을 받고, 무엇을 받지 않나요?</h2>
+    <div class="two">
+      <div class="box yes"><h3>함께 드리는 것</h3>
+        <ul><li>사전 스텝 교육 (온라인)</li><li>스텝 앞치마와 명찰</li><li>활동 시간 중 식사 또는 간식</li></ul></div>
+      <div class="box no"><h3>드리지 않는 것</h3>
+        <ul><li>활동비, 교통비</li><li>기부 명단·홍보물의 개인 이름 표기</li></ul></div>
+    </div>
+  </section>
+
+  <section id="roles">
+    <h2>스텝은 어떤 일을 하나요?</h2>
+    <ul class="plain">
+      <li>리틀산타 아이들이 자신의 재능을 선물로 잘 건넬 수 있도록 곁에서 돕고 안내합니다.</li>
+      <li>담당 존에서 아이들을 살피고, 손님 맞이와 현장 운영을 함께합니다.</li>
+      <li>행사 전 아이들이 '주는 기쁨'을 미리 경험할 수 있도록 준비 과정을 돕습니다.</li>
+    </ul>
+    <p>아래 역할 중 내가 잘할 수 있는 자리를 골라 지원해 주세요.</p>
+    <p class="hint">필요 인원은 예상치이며 행사 규모에 따라 바뀔 수 있습니다. 모든 스텝은 각 존의 산타 멘토, 운영진(패브릭토리 강사진)과 함께 움직입니다.</p>
+    <div class="filters" role="group" aria-label="시간대로 보기">
+      <button class="chip" type="button" data-f="all" aria-pressed="true">전체</button>
+      <button class="chip" type="button" data-f="준비" aria-pressed="false">준비 기간부터</button>
+      <button class="chip" type="button" data-f="부" aria-pressed="false">행사 중 (1부·2부)</button>
+      <button class="chip" type="button" data-f="종일" aria-pressed="false">종일</button>
+    </div>
+    <div class="roles" id="roleList"></div>
+  </section>
+
+  <section>
+    <h2>지원한 뒤에는 어떻게 되나요?</h2>
+    <ol class="steps">
+      <li><b>지원</b><span>아래 지원서를 제출하면 접수번호와 확인 메일이 갑니다.</span></li>
+      <li><b>배정 안내</b><span id="announceText">지망 역할과 가능한 시간을 보고 배정해 연락드립니다. 1지망이 마감되면 2지망으로 배정됩니다.</span></li>
+      <li><b>확정 회신</b><span id="confirmText">배정 안내를 받으면 기한 안에 확정 회신을 주세요. 기한이 지나면 대기자에게 자리가 넘어갑니다.</span></li>
+      <li><b>사전 교육</b><span>리틀산타 이야기, 아이를 대하는 원칙, 내 역할의 동선을 익힙니다. 교육 참석으로 최종 확정됩니다.</span></li>
+      <li><b>행사 당일</b><span>배정된 시간 30분 전에 도착해 앞치마와 명찰을 받고 운영진과 산타 멘토에게 인사합니다.</span></li>
+    </ol>
+  </section>
+
+  <section id="apply">
+    <h2>지원서 쓰기</h2>
+    <form id="f" novalidate>
+      <div class="part">
+        <h3>나에 대해</h3>
+        <div class="grid2">
+          <div class="field"><label class="req" for="name">이름</label><input id="name" type="text" autocomplete="name"></div>
+          <div class="field"><label class="req" for="phone">연락처</label><input id="phone" type="tel" autocomplete="tel" placeholder="010-0000-0000"></div>
+          <div class="field"><label class="req" for="email">이메일</label><input id="email" type="email" autocomplete="email" placeholder="접수 확인 메일을 보내드려요"></div>
+          <div class="field"><label for="region">사는 지역 <span class="hint">(구 단위, 선택)</span></label><input id="region" type="text" placeholder="예: 서울 은평구"></div>
+        </div>
+        <fieldset class="checks"><legend class="req">나이 확인</legend>
+          <label><input type="checkbox" id="age-ok"> 만 19세 이상입니다. (이번 스텝 모집은 성인만 지원할 수 있습니다)</label>
+        </fieldset>
+      </div>
+
+      <div class="part">
+        <h3>하고 싶은 일과 시간</h3>
+        <div class="grid2">
+          <div class="field"><label class="req" for="r1">1지망 역할</label><select id="r1"></select></div>
+          <div class="field"><label for="r2">2지망 역할</label><select id="r2"></select></div>
+        </div>
+        <fieldset class="checks"><legend class="req">행사 당일 참여</legend>
+          <label><input type="checkbox" id="both-ok"> 1부(11:00~13:00)와 2부(15:00~17:00)에 모두 참여합니다.</label>
+          <p class="hint">모든 스텝은 1부와 2부를 모두 함께합니다.</p>
+        </fieldset>
+        <fieldset class="checks"><legend class="req">세팅·철수 참여 <span class="hint">(모든 스텝 필수 · 한 가지 이상 선택)</span></legend>
+          <div id="setupList" class="checks"></div>
+        </fieldset>
+        <fieldset class="checks" id="trainingSet"><legend class="req">참석할 수 있는 사전 교육 일정</legend>
+          <div id="trainingList" class="checks"></div>
+        </fieldset>
+      </div>
+
+      <div class="part">
+        <h3>리틀산타와 나</h3>
+        <fieldset class="checks"><legend>리틀산타와 어떻게 연결되셨나요?</legend>
+          <label><input type="radio" name="route" id="route-1" value="이전 리틀산타 셀러 가족"> 이전 리틀산타 셀러 가족</label>
+          <label><input type="radio" name="route" id="route-2" value="이전 리틀산타 스텝"> 이전 리틀산타 스텝</label>
+          <label><input type="radio" name="route" id="route-3" value="패브릭토리 수업·교육 참여"> 패브릭토리 수업·교육 참여</label>
+          <label><input type="radio" name="route" id="route-4" value="지인 소개"> 지인 소개</label>
+          <label><input type="radio" name="route" id="route-5" value="공고를 보고 처음 지원"> 공고를 보고 처음 지원</label>
+        </fieldset>
+        <div class="field"><label class="req" for="motive">리틀산타 스텝이 되고 싶은 이유</label>
+          <textarea id="motive" rows="4" placeholder="30자 이상 적어 주세요"></textarea><span class="count" id="motiveCount">0 / 30자 이상</span></div>
+        <fieldset class="checks"><legend class="req" id="scenarioQ"></legend><div id="scenarioList" class="checks"></div></fieldset>
+        <div class="field"><label for="skill">도울 수 있는 특기나 경험</label>
+          <input id="skill" type="text" placeholder="예: 사진 촬영, 아이 돌봄 경험, 무대 설치, 응급처치 교육 이수"></div>
+        <div class="field"><label for="message">리틀산타에게 하고 싶은 말</label><textarea id="message" rows="2"></textarea></div>
+      </div>
+
+      <div class="part">
+        <div class="allrow"><h3>지원 전에 이해하고 동의해 주세요</h3><button type="button" class="linkbtn" id="checkAll">모두 읽었고 동의합니다</button></div>
+        <p class="hint">한 항목이라도 동의하지 않으면 지원할 수 없습니다. 하나씩 읽어 주세요.</p>
+        <div class="agree" id="agreeList"></div>
+      </div>
+
+      <div aria-hidden="true" style="position:absolute;left:-9999px"><label for="website">웹사이트</label><input id="website" type="text" tabindex="-1" autocomplete="off"></div>
+      <p class="err" id="err" role="alert" hidden></p>
+      <button class="btn" type="submit" id="submitBtn">지원서 제출하기</button>
+    </form>
+
+    <div class="done" id="done" hidden>
+      <h2>지원이 접수되었습니다</h2>
+      <div class="no" id="doneNo"></div>
+      <p>입력한 이메일로 접수 확인 메일을 보냈습니다. 지원서를 검토해 <span id="doneAnnounce"></span>배정 안내를 드릴게요. 배정 안내를 받으면 <span id="doneDays"></span>일 안에 확정 회신을 주세요.</p>
+      <p class="hint" id="doneContact"></p>
+    </div>
+  </section>
+
+  <footer>주최·주관 패브릭토리 · 받는 기쁨보다 더 큰 주는 기쁨을 찾는 크리스마스</footer>
+</div>
+<div class="stripe" aria-hidden="true"></div>
+
+<script>
+/* =====================================================================
+   여기만 고치면 됩니다 (GitHub에서 연필 아이콘으로 편집)
+   ===================================================================== */
+const CFG = {
+  // ① 구글 Apps Script 웹 앱 주소 (…/exec 로 끝나는 주소)를 따옴표 안에 붙여넣으세요.
+  endpoint: 'https://script.google.com/macros/s/AKfycbygmcz872mRunbHz0kwDf1P11Qu8HkJFhkiGX_tuE9aSdp_14bIi48OrvAuASaMXEcJ/exec',
+
   eventName: '2026 리틀산타 재능마켓',
-  closeAt: '2026-10-30T23:59:00+09:00',   // 스텝 모집 마감. index.html 과 같은 값으로
+  eventDate: '2026년 12월 12일(토)',
+  place: '미정 (확정 후 안내 예정)',
+  sessionTimes: { '1부': '11:00~13:00', '2부': '15:00~17:00' },
+  closeAt: '2026-10-30T23:59:00+09:00',   // 스텝 모집 마감 (Code.gs 와 같은 값)
+  trainingDates: [],        // 사전 교육 날짜가 정해지면 넣으세요. 예: ['11월 21일(토) 오전 10시 · 온라인']
+  trainingNote: '온라인 (추후 일정 안내)',
   confirmDays: 3,           // 배정 안내 후 확정 회신 기한(일)
   cancelNoticeDays: 7,      // 불참 시 며칠 전까지 알려야 하는지
-  contact: '010-4262-6107', // 지원자 확인 메일에 넣을 문의처
-  announceDate: '11월 1일(일)', // 스텝 확정 안내일
-  eventInfo: '2026년 12월 12일(토) · 1부 11:00~13:00 · 2부 15:00~17:00 · 장소는 확정 후 안내',
-  notifyEmail: '',          // 새 지원 알림 받을 메일. 비우면 이 스크립트 소유자에게 보냅니다.
-  sendApplicantEmail: true, // 지원자에게 접수 확인 메일 보내기
-  agreementCount: 9,        // index.html 의 필수 동의 항목 개수와 같아야 합니다.
+  contact: '010-4262-6107',
+  dataRetention: '행사 종료 후 6개월',
+  announceDate: '11월 1일(일)',   // 스텝 확정 안내일
 
-  // index.html 의 역할 이름과 똑같이 적어 주세요. '역할별 현황' 탭이 이 목록으로 만들어집니다.
+  // 전체 일정 (페이지의 '일정' 표에 그대로 보입니다)
+  schedule: [
+    ['10.26(월) ~ 10.30(금)', '스텝 모집'],
+    ['11.1(일)', '스텝 확정 안내'],
+    ['11.2(월) ~ 11.6(금)', '리틀산타 모집'],
+    ['11.11(수)', '리틀산타 확정 안내'],
+    ['추후 안내', '스텝 사전 교육 (온라인)'],
+    ['12.12(토)', '리틀산타 재능마켓']
+  ],
+
+  // 역할 이름을 바꾸면 Code.gs 의 roles 목록도 똑같이 바꿔 주세요.
   roles: [
-    ['산타 멘토', '존마다 1명'],
-    ['웰컴 산타', '부당 3명'],
-    ['길잡이 루돌프', '부당 2명'],
-    ['포토존 엘프', '부당 1명'],
-    ['안전 지킴이', '부당 2명'],
-    ['기록 엘프', '1~2명']
-  ]
+    { id: 'mentor', name: '산타 멘토', tag: '리틀산타 관리·교육', when: '11월 준비 기간 ~ 행사 당일', f: '준비', where: '담당 존', need: '존마다 1명',
+      tasks: ['리틀산타 존마다 1명씩 배정되어 존을 맡기', '준비 과정과 메뉴판·포스터 만들기 등 부모님 문의를 담당 존의 산타 멘토가 안내', '행사 당일 존 담당 (자리 배치 및 운영)'],
+      fit: '아이를 가르치거나 돌본 경험이 있는 분, 준비 기간에도 꾸준히 시간을 낼 수 있는 분' },
+    { id: 'welcome', name: '웰컴 산타', tag: '접수·티켓', when: '1부·2부', f: '부', where: '1층 인포', need: '부당 3명',
+      tasks: ['입장 티켓 확인과 현장 판매', '선물 사인카드(리틀산타 5명) 나눠 주며 이용 방법 안내', '셀러 아이·보호자 도착 확인 후 담당 존의 산타 멘토에게 연결'],
+      fit: '처음 오는 손님에게 밝게 설명하는 일이 편한 분' },
+    { id: 'guide', name: '길잡이 루돌프', tag: '동선 안내', when: '1부·2부', f: '부', where: '1·2층 계단, 출입구', need: '부당 2명',
+      tasks: ['층별 존 위치 안내, 계단 오르내림 정리', '붐비는 존 앞 줄 나누기, 한산한 존으로 손님 안내', '1부에서 2부로 바뀔 때 손님·셀러 이동 정리'],
+      fit: '오래 서 있어도 괜찮고 공간 흐름을 잘 보는 분' },
+    { id: 'photo', name: '포토존 엘프', tag: '포토존', when: '1부·2부', f: '부', where: '1층 포토존', need: '부당 1명',
+      tasks: ['손님 휴대폰으로 가족 사진 찍어 주기', '포토존 줄 관리, 소품 정리'],
+      fit: '사진 찍어 주는 걸 좋아하는 분' },
+    { id: 'safety', name: '안전 지킴이', tag: '안전', when: '1부·2부', f: '부', where: '계단, 출입구, 스포츠존 주변', need: '부당 2명',
+      tasks: ['계단·출입구에서 뛰는 아이 살피기', '보호자를 잃은 아이가 생기면 인포로 연결하고 안내 요청', '응급처치 키트 위치를 익히고 다친 아이를 운영진에게 연결'],
+      fit: '차분하고 상황 판단이 빠른 분, 응급처치 교육 이수자 환영' },
+    { id: 'record', name: '기록 엘프', tag: 'SNS 사진·영상', when: '1부·2부', f: '부', where: '1·2층 전체', need: '1~2명',
+      tasks: ['행사 공식 사진·영상은 사진작가님이 따로 촬영합니다', '기록 엘프는 SNS에 올릴 현장 사진과 짧은 영상을 휴대폰으로 찍습니다', '촬영 비동의 아동 목록을 받아 해당 아이는 얼굴이 나오지 않게 촬영', '촬영본은 당일 패브릭토리에 전달하고 개인 보관·게시하지 않기'],
+      fit: '휴대폰으로 사진·영상 찍기를 좋아하는 분, SNS용 짧은 영상에 익숙한 분' },
+  ],
+
+  scenario: {
+    question: '셀러 아이가 손님 앞에서 선물 만들기를 어려워하며 멈춰 있어요. 스텝인 나는 어떻게 할까요?',
+    options: [
+      '손님이 기다리지 않도록 내가 빨리 대신 만들어 건넨다',
+      '아이에게 도움이 필요한지 먼저 묻고, 원하는 만큼만 거든 뒤 선물은 아이가 직접 건네게 한다',
+      '옆 존의 더 잘하는 아이를 불러 대신 하게 한다',
+      '손님에게 다른 존으로 가시라고 안내한다'
+    ]
+  }
 };
 
-const SHEET_APPLICANTS = '지원자';
-const SHEET_SUMMARY = '역할별 현황';
-const HEADERS = ['접수번호', '접수일시', '이름', '연락처', '이메일', '나이 구분', '거주 지역', '1지망', '2지망',
-  '참여 가능 시간', '사전교육 가능 일정', '연결 경로', '지원 동기', '상황 질문 답변', '특기·경험', '하고 싶은 말',
-  '필수 동의', '중복 여부', '상태', '배정 역할', '배정 시간', '확정 회신', '교육 참석', '메모'];
-const STATUS = ['접수', '검토 중', '배정 안내', '확정', '교육 완료', '대기', '취소'];
+// 필수 동의 항목 (개수를 바꾸면 Code.gs 의 agreementCount 도 같은 숫자로)
+CFG.agreements = [
+  { id: 'unpaid', title: '무보수 자원봉사입니다',
+    body: '활동비와 교통비는 없습니다. 식사 또는 간식, 스텝 앞치마와 명찰을 드립니다.' },
+  { id: 'name', title: '기부는 아이들 이름으로만 합니다',
+    body: '행사 수익은 리틀산타 아이들의 이름으로 기부됩니다. 기부 명단, 현수막, 홍보물에 스텝 개인 이름은 들어가지 않습니다.' },
+  { id: 'training', title: '온라인 사전 교육에 참여하겠습니다',
+    body: '사전 교육에서 리틀산타 이야기, 아이를 대하는 원칙, 역할별 동선을 익힙니다. 교육에 참석하지 않으면 배정이 취소됩니다.' },
+  { id: 'full', title: '행사 당일 정해진 시간 동안 끝까지 함께하겠습니다',
+    body: '1부와 2부 모두 참여하며, 시작 30분 전에 도착하고, 중간에 자리를 비우거나 먼저 떠나지 않습니다. 아이들은 스텝이 있다는 전제로 자기 자리를 지킵니다.' },
+  { id: 'confirm', title: '배정 안내를 받으면 ' + CFG.confirmDays + '일 안에 확정 회신합니다',
+    body: '기한 안에 회신이 없으면 대기자에게 자리가 넘어갑니다.' },
+  { id: 'cancel', title: '못 오게 되면 행사 ' + CFG.cancelNoticeDays + '일 전까지 알립니다',
+    body: '그래야 대기자를 배정하고 아이들 곁을 비우지 않을 수 있습니다. 연락 없이 불참하면 다음 회차 스텝 모집에서 제외됩니다.' },
+  { id: 'photo', title: '행사 중 알게 된 아이들과 가족의 정보를 외부에 공유하지 않습니다',
+    body: '행사 중 찍은 아이들 사진과 영상, 아이와 가족에 대해 알게 된 정보를 개인 SNS나 메신저에 올리거나 전하지 않습니다.' },
+  { id: 'record', title: '행사 기록용 사진·영상 촬영에 동의합니다',
+    body: '스텝 활동 모습이 행사 기록 사진과 영상에 담길 수 있습니다. 기록물은 리틀산타와 패브릭토리의 활동 소개에 쓰입니다.' },
+  { id: 'privacy', title: '개인정보 수집·이용에 동의합니다',
+    body: '수집 항목: 이름, 연락처, 이메일, 나이 구분, 거주 지역, 지원서에 쓴 내용. 이용 목적: 스텝 선정, 배정 안내, 사전 교육과 행사 당일 연락. 보유 기간: ' +
+      CFG.dataRetention + ' 뒤 파기. 동의하지 않을 수 있으나, 동의하지 않으면 지원할 수 없습니다.' }
+];
+CFG.closed = !!(CFG.closeAt && new Date() > new Date(CFG.closeAt));
+/* ===================================================================== */
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
-// 주소를 브라우저로 열었을 때: 접수 창구가 살아 있는지 확인용
-function doGet() {
-  return json_({ ok: true, message: '리틀산타 스텝 접수 창구가 열려 있습니다.' });
+// 상단 정보
+const facts = [];
+if (CFG.eventDate) facts.push(['행사', CFG.eventDate]);
+Object.keys(CFG.sessionTimes).forEach(k => { if (CFG.sessionTimes[k]) facts.push([k, CFG.sessionTimes[k]]); });
+if (CFG.place) facts.push(['장소', CFG.place]);
+if (CFG.closeAt) facts.push(['스텝 모집 마감', new Date(CFG.closeAt).toLocaleString('ko-KR', {month:'long', day:'numeric', weekday:'short', hour:'numeric', minute:'2-digit'})]);
+if (CFG.contact) facts.push(['문의', CFG.contact]);
+$('scheduleList').innerHTML = (CFG.schedule || []).map(r => '<li><b>' + esc(r[0]) + '</b><span>' + esc(r[1]) + '</span></li>').join('');
+$('contactLine').textContent = CFG.contact ? '궁금한 점은 ' + CFG.contact + '로 문의해 주세요.' : '';
+$('announceText').textContent = '지망 역할과 가능한 시간을 보고 배정해 ' + (CFG.announceDate ? CFG.announceDate + '에 ' : '') + '연락드립니다. 1지망이 마감되면 2지망으로 배정됩니다.';
+$('facts').innerHTML = facts.map(f => '<span><b>' + esc(f[0]) + '</b>' + esc(f[1]) + '</span>').join('');
+$('confirmText').textContent = '배정 안내를 받으면 ' + CFG.confirmDays + '일 안에 확정 회신을 주세요. 기한이 지나면 대기자에게 자리가 넘어갑니다.';
+if (CFG.closed) { $('closedBox').hidden = false; $('apply').hidden = true; }
+
+// 역할 카드
+function renderRoles(filter) {
+  $('roleList').innerHTML = CFG.roles.filter(r => filter === 'all' || r.f === filter).map(r => `
+    <article class="role">
+      <div class="top"><h3>${esc(r.name)}</h3><span class="tag">${esc(r.tag)}</span></div>
+      <div class="meta"><span>시간 ${esc(r.when)}</span><span>위치 ${esc(r.where)}</span><span>필요 ${esc(r.need)}</span></div>
+      <ul>${r.tasks.map(t => '<li>' + esc(t) + '</li>').join('')}</ul>
+      <p class="fit">이런 분께 맞아요 · ${esc(r.fit)}</p>
+      ${CFG.closed ? '' : '<button class="btn" type="button" data-pick="' + r.id + '">이 역할로 지원하기</button>'}
+    </article>`).join('');
+}
+renderRoles('all');
+document.querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
+  renderRoles(b.dataset.f);
+}));
+
+// 지원서 선택지
+const opt = r => '<option value="' + r.id + '">' + esc(r.name) + ' (' + esc(r.tag) + ')</option>';
+$('r1').innerHTML = '<option value="">선택해 주세요</option>' + CFG.roles.map(opt).join('');
+$('r2').innerHTML = '<option value="">상관없음</option>' + CFG.roles.map(opt).join('');
+$('roleList').addEventListener('click', e => {
+  const b = e.target.closest('[data-pick]'); if (!b) return;
+  const id = b.dataset.pick;
+  if ($('r1').value && $('r1').value !== id && !$('r2').value) $('r2').value = id; else $('r1').value = id;
+  $('apply').scrollIntoView({behavior:'smooth'});
+});
+
+const setupTimes = ['행사 전 세팅', '행사 후 철수'];
+$('setupList').innerHTML = setupTimes.map((t, i) =>
+  '<label><input type="checkbox" name="setup" id="setup-' + i + '" value="' + esc(t) + '"> ' + esc(t) + '</label>').join('');
+
+if (CFG.trainingDates.length) {
+  $('trainingList').innerHTML = CFG.trainingDates.map((t, i) =>
+    '<label><input type="checkbox" name="training" id="training-' + i + '" value="' + esc(t) + '"> ' + esc(t) + '</label>').join('');
+} else if (CFG.trainingNote) {
+  $('trainingList').innerHTML = '<p class="hint">' + esc(CFG.trainingNote) + '. 일정이 정해지면 배정 안내와 함께 알려드립니다.</p>';
+  $('trainingSet').querySelector('legend').classList.remove('req');
+} else {
+  $('trainingSet').hidden = true;
 }
 
-// 지원 페이지가 지원서를 보내는 곳
-function doPost(e) {
-  try {
-    const d = JSON.parse((e && e.postData && e.postData.contents) || '{}');
-    if (d.website) return json_({ ok: true, no: 'LS26-000' }); // 봇이 채우는 숨은 칸
-    return json_(saveApplication_(d));
-  } catch (err) {
-    return json_({ ok: false, error: String(err && err.message || err) });
+$('scenarioQ').textContent = CFG.scenario.question;
+$('scenarioList').innerHTML = CFG.scenario.options.map((o, i) =>
+  '<label><input type="radio" name="scenario" id="scenario-' + i + '" value="' + esc(o) + '"> ' + esc(o) + '</label>').join('');
+
+$('agreeList').innerHTML = CFG.agreements.map(a => `
+  <div class="ag"><label><input type="checkbox" class="agc" id="ag-${a.id}" data-id="${a.id}"> ${esc(a.title)}</label><p>${esc(a.body)}</p></div>`).join('');
+$('checkAll').addEventListener('click', () => document.querySelectorAll('.agc').forEach(c => { c.checked = true; c.dispatchEvent(new Event('change', { bubbles: true })); }));
+
+$('motive').addEventListener('input', () => {
+  const n = $('motive').value.trim().length;
+  $('motiveCount').textContent = n + ' / 30자 이상';
+});
+
+// 칸별 오류 표시
+function markInvalid(el, msg) {
+  if (!el) return;
+  el.classList.add('invalid');
+  const box = el.closest('.field, fieldset, .ag') || el;
+  const p = document.createElement('p');
+  p.className = 'ferr'; p.textContent = msg;
+  box.appendChild(p);
+}
+function clearInvalid() {
+  document.querySelectorAll('.invalid').forEach(x => x.classList.remove('invalid'));
+  document.querySelectorAll('.ferr').forEach(x => x.remove());
+}
+// 고치면 그 칸의 빨간 표시가 사라집니다.
+function clearOne(e) {
+  const box = e.target.closest('.field, fieldset, .ag');
+  if (!box) return;
+  box.querySelectorAll('.ferr').forEach(x => x.remove());
+  box.classList.remove('invalid');
+  box.querySelectorAll('.invalid').forEach(x => x.classList.remove('invalid'));
+}
+$('f').addEventListener('input', clearOne);
+$('f').addEventListener('change', clearOne);
+
+// 제출
+const roleName = id => (CFG.roles.find(r => r.id === id) || {}).name || '';
+$('f').addEventListener('submit', e => {
+  e.preventDefault();
+  const val = id => $(id).value.trim();
+  const checked = name => [...document.querySelectorAll('input[name=' + name + ']:checked')].map(x => x.value);
+  const agreed = {}; document.querySelectorAll('.agc').forEach(c => agreed[c.dataset.id] = c.checked);
+  const data = {
+    name: val('name'), phone: val('phone'), email: val('email'), region: val('region'),
+    age: $('age-ok').checked ? '성인 (만 19세 이상)' : '',
+    role1: roleName($('r1').value), role2: roleName($('r2').value),
+    times: ($('both-ok').checked ? ['1부', '2부'] : []).concat(checked('setup')), setupCount: checked('setup').length, trainings: checked('training'), route: checked('route')[0] || '',
+    motive: val('motive'), scenario: checked('scenario')[0] || '', skill: val('skill'), message: val('message'),
+    agreedAll: Object.values(agreed).every(Boolean), agreedCount: Object.keys(agreed).length,
+    website: val('website')
+  };
+  // 빠진 항목 찾기: 칸마다 안내 문구를 붙이고, 첫 번째 칸으로 이동합니다.
+  clearInvalid();
+  const fsOf = id => $(id).closest('fieldset');
+  const problems = [];
+  const need = (ok, el, msg) => { if (!ok) problems.push([el, msg]); };
+  need(data.name, $('name'), '이름을 적어 주세요.');
+  need(data.phone.replace(/\D/g, '').length >= 9, $('phone'), '연락처를 010-0000-0000 형식으로 적어 주세요.');
+  need(/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email), $('email'), '이메일 주소를 확인해 주세요. 접수 확인 메일이 이 주소로 갑니다.');
+  need(data.age, fsOf('age-ok'), '만 19세 이상인 분만 지원할 수 있습니다. 확인란에 체크해 주세요.');
+  need(data.role1, $('r1'), '1지망 역할을 골라 주세요.');
+  need($('both-ok').checked, fsOf('both-ok'), '1부와 2부 모두 참여하는 것이 스텝 지원 조건입니다. 확인란에 체크해 주세요.');
+  need(data.setupCount > 0, fsOf('setupList'), '세팅과 철수 중 한 가지 이상을 꼭 골라 주세요.');
+  if (CFG.trainingDates.length) need(data.trainings.length, $('trainingSet'), '참석할 수 있는 사전 교육 일정을 골라 주세요.');
+  need(data.motive.length >= 30, $('motive'), '지금 ' + data.motive.length + '자입니다. 30자 이상 적어 주세요.');
+  need(data.scenario, fsOf('scenarioList'), '상황 질문의 답을 골라 주세요.');
+  const unchecked = [...document.querySelectorAll('.agc')].filter(c => !c.checked);
+  need(!unchecked.length, unchecked[0] && unchecked[0].closest('.ag'), '동의하지 않은 항목이 ' + unchecked.length + '개 있습니다. 읽고 체크해 주세요.');
+  const err = $('err');
+  if (problems.length) {
+    problems.forEach(([el, msg]) => markInvalid(el, msg));
+    err.textContent = '확인이 필요한 항목이 ' + problems.length + '개 있습니다. 빨간 표시를 확인해 주세요.';
+    err.hidden = false;
+    const first = problems[0][0];
+    first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const focusEl = first.matches('input,select,textarea') ? first : first.querySelector('input,select,textarea');
+    if (focusEl) setTimeout(() => focusEl.focus({ preventScroll: true }), 400);
+    return;
   }
-}
-
-function json_(obj) {
-  return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
-}
-
-function saveApplication_(d) {
-  if (CONFIG.closeAt && new Date() > new Date(CONFIG.closeAt)) throw new Error('모집이 마감되었습니다.');
-
-  const s = v => String(v == null ? '' : v).trim().slice(0, 2000);
-  const list = v => (Array.isArray(v) ? v : []).map(s).filter(String).slice(0, 10);
-  const roleNames = CONFIG.roles.map(r => r[0]);
-  const name = s(d.name), phone = s(d.phone).replace(/[^0-9]/g, ''), email = s(d.email);
-  const r1 = s(d.role1), r2 = s(d.role2) || '상관없음';
-  const times = list(d.times), trainings = list(d.trainings);
-
-  const missing = [];
-  if (!name) missing.push('이름');
-  if (phone.length < 9 || phone.length > 11) missing.push('연락처');
-  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) missing.push('이메일');
-  if (!s(d.age)) missing.push('나이 구분');
-  if (roleNames.indexOf(r1) === -1) missing.push('1지망 역할');
-  if (times.indexOf('1부') === -1 || times.indexOf('2부') === -1) missing.push('1부·2부 참여 확인');
-  if (!times.some(t => t === '행사 전 세팅' || t === '행사 후 철수')) missing.push('세팅·철수 참여');
-  if (s(d.motive).length < 30) missing.push('지원 동기(30자 이상)');
-  if (!s(d.scenario)) missing.push('상황 질문');
-  if (d.agreedAll !== true || Number(d.agreedCount) !== CONFIG.agreementCount) missing.push('필수 동의');
-  if (missing.length) throw new Error(missing.join(', ') + ' 항목을 확인해 주세요.');
-
-  const lock = LockService.getScriptLock();
-  lock.waitLock(20000);
-  try {
-    const sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_APPLICANTS) || setup().applicants;
-    const last = sh.getLastRow();
-    let dup = '';
-    if (last > 1) {
-      const phones = sh.getRange(2, 4, last - 1, 1).getValues().flat().map(p => String(p).replace(/[^0-9]/g, ''));
-      if (phones.indexOf(phone) !== -1) dup = '같은 연락처로 이전 지원 있음';
-    }
-    const no = 'LS26-' + String(last).padStart(3, '0');
-    const fmtPhone = phone.replace(/^(\d{3})(\d{3,4})(\d{4})$/, '$1-$2-$3');
-    sh.appendRow([no, new Date(), name, "'" + fmtPhone, email, s(d.age), s(d.region), r1, r2,
-      times.join(', '), trainings.join(', ') || '일정 확정 후 안내', s(d.route), s(d.motive), s(d.scenario),
-      s(d.skill), s(d.message), '전체 동의 (' + CONFIG.agreementCount + '개)', dup, '접수', '', '', '', '', '']);
-
-    notifyOwner_(no, name, r1, r2, times, dup);
-    if (CONFIG.sendApplicantEmail) mailApplicant_(email, name, no, r1, r2, times);
-    return { ok: true, no: no };
-  } finally {
-    lock.releaseLock();
-  }
-}
-
-function notifyOwner_(no, name, r1, r2, times, dup) {
-  try {
-    const to = CONFIG.notifyEmail || Session.getEffectiveUser().getEmail();
-    if (!to) return;
-    MailApp.sendEmail(to, '[리틀산타 스텝] 새 지원 ' + no + ' · ' + name,
-      '이름: ' + name + '\n1지망: ' + r1 + '\n2지망: ' + r2 + '\n가능 시간: ' + times.join(', ') +
-      (dup ? '\n확인 필요: ' + dup : '') + '\n\n지원자 시트: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl());
-  } catch (e) { console.warn(e); }
-}
-
-function mailApplicant_(email, name, no, r1, r2, times) {
-  try {
-    const c = CONFIG;
-    const body = [
-      name + '님, ' + c.eventName + ' 스텝에 지원해 주셔서 고맙습니다.',
-      '',
-      '접수번호: ' + no,
-      '1지망: ' + r1 + ' / 2지망: ' + r2,
-      '참여 가능 시간: ' + times.join(', '),
-      '',
-      '앞으로 이렇게 진행됩니다.',
-      '1. 지원서를 검토해 역할과 시간을 배정한 뒤 ' + (c.announceDate ? c.announceDate + '에 ' : '') + '연락드립니다.',
-      '2. 배정 안내를 받으면 ' + c.confirmDays + '일 안에 확정 회신을 주세요. 기한이 지나면 대기자에게 자리가 넘어갑니다.',
-      '3. 온라인 사전 교육에 참석하면 최종 확정입니다. 교육 일정은 따로 안내드립니다.',
-      '4. 사정이 생기면 행사 ' + c.cancelNoticeDays + '일 전까지 꼭 알려 주세요.',
-      '',
-      '행사: ' + c.eventInfo,
-      '',
-      '스텝 활동은 무보수이며, 행사 수익은 리틀산타 아이들의 이름으로만 기부됩니다.',
-      c.contact ? '문의: ' + c.contact : '',
-      '',
-      '패브릭토리 리틀산타 운영팀'
-    ].join('\n');
-    MailApp.sendEmail(email, '[리틀산타] 스텝 지원이 접수되었습니다 (' + no + ')', body);
-  } catch (e) { console.warn(e); }
-}
-
-// 처음 한 번 실행합니다. 시트 탭, 머리글, 상태 선택지, 역할별 현황 표를 만듭니다.
-function setup() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
-  let sh = ss.getSheetByName(SHEET_APPLICANTS);
-  if (!sh) sh = ss.insertSheet(SHEET_APPLICANTS, 0);
-  sh.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS])
-    .setFontWeight('bold').setBackground('#f7e6df').setWrap(true);
-  sh.getRange(1, 19, 1, 6).setBackground('#e3e8d3'); // 운영진이 채우는 칸(상태~메모)
-  sh.setFrozenRows(1);
-  sh.setFrozenColumns(3);
-  sh.getRange('B:B').setNumberFormat('yyyy-mm-dd hh:mm');
-  [13, 14].forEach(c => sh.setColumnWidth(c, 320));
-  sh.getRange(2, 19, 999, 1).setDataValidation(
-    SpreadsheetApp.newDataValidation().requireValueInList(STATUS, true).build());
-  sh.getRange(2, 20, 999, 1).setDataValidation(
-    SpreadsheetApp.newDataValidation().requireValueInList(CONFIG.roles.map(r => r[0]), true).setAllowInvalid(true).build());
-  sh.getRange(2, 22, 999, 2).setDataValidation(
-    SpreadsheetApp.newDataValidation().requireValueInList(['예', '아니오'], true).build());
-
-  let sm = ss.getSheetByName(SHEET_SUMMARY);
-  if (!sm) sm = ss.insertSheet(SHEET_SUMMARY, 1);
-  sm.clear();
-  const head = ['역할', '필요 인원', '1지망 지원', '2지망 지원', '배정 안내', '확정', '교육 완료'];
-  const q = "'" + SHEET_APPLICANTS + "'!";
-  const rows = CONFIG.roles.map((r, i) => {
-    const row = i + 2;
-    return [r[0], r[1],
-      '=COUNTIF(' + q + 'H:H,A' + row + ')',
-      '=COUNTIF(' + q + 'I:I,A' + row + ')',
-      '=COUNTIFS(' + q + 'T:T,A' + row + ',' + q + 'S:S,"배정 안내")',
-      '=COUNTIFS(' + q + 'T:T,A' + row + ',' + q + 'S:S,"확정")',
-      '=COUNTIFS(' + q + 'T:T,A' + row + ',' + q + 'S:S,"교육 완료")'];
-  });
-  sm.getRange(1, 1, 1, head.length).setValues([head]).setFontWeight('bold').setBackground('#f7e6df');
-  sm.getRange(2, 1, rows.length, head.length).setValues(rows);
-  const tr = rows.length + 2, end = tr - 1;
-  sm.getRange(tr, 1, 1, 7).setValues([['합계', '', '=SUM(C2:C' + end + ')', '=SUM(D2:D' + end + ')',
-    '=SUM(E2:E' + end + ')', '=SUM(F2:F' + end + ')', '=SUM(G2:G' + end + ')']]).setFontWeight('bold');
-  sm.setFrozenRows(1);
-  sm.autoResizeColumns(1, 7);
-
-  const def = ss.getSheetByName('시트1') || ss.getSheetByName('Sheet1');
-  if (def && def.getLastRow() === 0 && ss.getSheets().length > 2) ss.deleteSheet(def);
-  return { applicants: sh, summary: sm };
-}
+  err.hidden = true;
+  const btn = $('submitBtn'); btn.disabled = true; btn.textContent = '제출하는 중…';
+  const fail = msg => {
+    btn.disabled = false; btn.textContent = '지원서 제출하기';
+    err.textContent = msg; err.hidden = false;
+  };
+  if (!CFG.endpoint) { fail('아직 접수 창구가 연결되지 않았습니다. 운영팀에 알려 주세요.'); return; }
+  if (!/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(CFG.endpoint)) { fail('접수 창구 주소가 올바르지 않습니다. 운영팀에 알려 주세요.'); return; }
+  fetch(CFG.endpoint, { method: 'POST', body: JSON.stringify(data) })
+    .then(r => r.json())
+    .then(res => {
+      if (!res.ok) { fail((res.error || '제출하지 못했습니다.') + ''); return; }
+      $('f').hidden = true;
+      $('doneNo').textContent = '접수번호 ' + res.no;
+      $('doneDays').textContent = CFG.confirmDays;
+      $('doneAnnounce').textContent = CFG.announceDate ? CFG.announceDate + '에 ' : '';
+      $('doneContact').textContent = CFG.contact ? '문의: ' + CFG.contact : '';
+      $('done').hidden = false;
+      $('done').scrollIntoView({behavior:'smooth', block:'center'});
+    })
+    .catch(() => fail('접수 창구에 연결하지 못했습니다. 인터넷 연결을 확인하고 잠시 뒤 다시 시도해 주세요.'));
+});
+</script>
+</body>
+</html>
