@@ -78,6 +78,10 @@ input[type=text],input[type=tel],input[type=email],select,textarea{font:inherit;
 .ag p{font-size:14px;color:var(--muted);margin:4px 0 0 28px}
 .allrow{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
 .linkbtn{font:inherit;font-size:14px;background:none;border:1px solid var(--line);border-radius:8px;padding:4px 10px;color:var(--ink);cursor:pointer}
+.invalid{outline:2px solid var(--red);outline-offset:4px;border-radius:8px}
+input.invalid,select.invalid,textarea.invalid{outline:0;border-color:var(--red);box-shadow:0 0 0 2px var(--red)}
+.ag.invalid{border-color:var(--red)}
+.ferr{color:var(--red);font-size:14px;font-weight:700;margin:4px 0 0}
 .err{color:var(--red);font-size:15px}
 .done{border:2px solid var(--olive);border-radius:16px;padding:22px;background:var(--card);display:grid;gap:10px}
 .done .no{font-family:var(--display);font-size:28px;color:var(--red)}
@@ -211,7 +215,7 @@ footer{font-size:13px;color:var(--muted);text-align:center}
    ===================================================================== */
 const CFG = {
   // ① 구글 Apps Script 웹 앱 주소 (…/exec 로 끝나는 주소)를 따옴표 안에 붙여넣으세요.
-  endpoint: '',
+  endpoint: 'https://script.google.com/macros/s/AKfycbygmcz872mRunbHz0kwDf1P11Qu8HkJFhkiGX_tuE9aSdp_14bIi48OrvAuASaMXEcJ/exec',
 
   eventName: '2027 리틀산타 재능마켓',
   eventDate: '',            // 예: '2027년 12월 11일(토)'
@@ -353,12 +357,36 @@ $('scenarioList').innerHTML = CFG.scenario.options.map((o, i) =>
 
 $('agreeList').innerHTML = CFG.agreements.map(a => `
   <div class="ag"><label><input type="checkbox" class="agc" id="ag-${a.id}" data-id="${a.id}"> ${esc(a.title)}</label><p>${esc(a.body)}</p></div>`).join('');
-$('checkAll').addEventListener('click', () => document.querySelectorAll('.agc').forEach(c => c.checked = true));
+$('checkAll').addEventListener('click', () => document.querySelectorAll('.agc').forEach(c => { c.checked = true; c.dispatchEvent(new Event('change', { bubbles: true })); }));
 
 $('motive').addEventListener('input', () => {
   const n = $('motive').value.trim().length;
   $('motiveCount').textContent = n + ' / 30자 이상';
 });
+
+// 칸별 오류 표시
+function markInvalid(el, msg) {
+  if (!el) return;
+  el.classList.add('invalid');
+  const box = el.closest('.field, fieldset, .ag') || el;
+  const p = document.createElement('p');
+  p.className = 'ferr'; p.textContent = msg;
+  box.appendChild(p);
+}
+function clearInvalid() {
+  document.querySelectorAll('.invalid').forEach(x => x.classList.remove('invalid'));
+  document.querySelectorAll('.ferr').forEach(x => x.remove());
+}
+// 고치면 그 칸의 빨간 표시가 사라집니다.
+function clearOne(e) {
+  const box = e.target.closest('.field, fieldset, .ag');
+  if (!box) return;
+  box.querySelectorAll('.ferr').forEach(x => x.remove());
+  box.classList.remove('invalid');
+  box.querySelectorAll('.invalid').forEach(x => x.classList.remove('invalid'));
+}
+$('f').addEventListener('input', clearOne);
+$('f').addEventListener('change', clearOne);
 
 // 제출
 const roleName = id => (CFG.roles.find(r => r.id === id) || {}).name || '';
@@ -376,20 +404,33 @@ $('f').addEventListener('submit', e => {
     agreedAll: Object.values(agreed).every(Boolean), agreedCount: Object.keys(agreed).length,
     website: val('website')
   };
-  const miss = [];
-  if (!data.name) miss.push('이름');
-  if (data.phone.replace(/\D/g, '').length < 9) miss.push('연락처');
-  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email)) miss.push('이메일');
-  if (!data.age) miss.push('나이');
-  if (!data.role1) miss.push('1지망 역할');
-  if (!data.times.length) miss.push('참여 가능 시간');
-  if (CFG.trainingDates.length && !data.trainings.length) miss.push('사전 교육 일정');
-  if (data.motive.length < 30) miss.push('지원 동기 30자 이상');
-  if (!data.scenario) miss.push('상황 질문');
-  const notAgreed = Object.keys(agreed).filter(k => !agreed[k]).length;
-  if (notAgreed) miss.push('동의 항목 ' + notAgreed + '개');
+  // 빠진 항목 찾기: 칸마다 안내 문구를 붙이고, 첫 번째 칸으로 이동합니다.
+  clearInvalid();
+  const fsOf = id => $(id).closest('fieldset');
+  const problems = [];
+  const need = (ok, el, msg) => { if (!ok) problems.push([el, msg]); };
+  need(data.name, $('name'), '이름을 적어 주세요.');
+  need(data.phone.replace(/\D/g, '').length >= 9, $('phone'), '연락처를 010-0000-0000 형식으로 적어 주세요.');
+  need(/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email), $('email'), '이메일 주소를 확인해 주세요. 접수 확인 메일이 이 주소로 갑니다.');
+  need(data.age, fsOf('age-adult'), '나이를 골라 주세요.');
+  need(data.role1, $('r1'), '1지망 역할을 골라 주세요.');
+  need(data.times.length, fsOf('timeList'), '참여할 수 있는 시간을 하나 이상 골라 주세요.');
+  if (CFG.trainingDates.length) need(data.trainings.length, $('trainingSet'), '참석할 수 있는 사전 교육 일정을 골라 주세요.');
+  need(data.motive.length >= 30, $('motive'), '지금 ' + data.motive.length + '자입니다. 30자 이상 적어 주세요.');
+  need(data.scenario, fsOf('scenarioList'), '상황 질문의 답을 골라 주세요.');
+  const unchecked = [...document.querySelectorAll('.agc')].filter(c => !c.checked);
+  need(!unchecked.length, unchecked[0] && unchecked[0].closest('.ag'), '동의하지 않은 항목이 ' + unchecked.length + '개 있습니다. 읽고 체크해 주세요.');
   const err = $('err');
-  if (miss.length) { err.textContent = miss.join(', ') + '을(를) 확인해 주세요.'; err.hidden = false; return; }
+  if (problems.length) {
+    problems.forEach(([el, msg]) => markInvalid(el, msg));
+    err.textContent = '확인이 필요한 항목이 ' + problems.length + '개 있습니다. 빨간 표시를 확인해 주세요.';
+    err.hidden = false;
+    const first = problems[0][0];
+    first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const focusEl = first.matches('input,select,textarea') ? first : first.querySelector('input,select,textarea');
+    if (focusEl) setTimeout(() => focusEl.focus({ preventScroll: true }), 400);
+    return;
+  }
   err.hidden = true;
   const btn = $('submitBtn'); btn.disabled = true; btn.textContent = '제출하는 중…';
   const fail = msg => {
@@ -397,6 +438,7 @@ $('f').addEventListener('submit', e => {
     err.textContent = msg; err.hidden = false;
   };
   if (!CFG.endpoint) { fail('아직 접수 창구가 연결되지 않았습니다. 운영팀에 알려 주세요.'); return; }
+  if (!/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(CFG.endpoint)) { fail('접수 창구 주소가 올바르지 않습니다. 운영팀에 알려 주세요.'); return; }
   fetch(CFG.endpoint, { method: 'POST', body: JSON.stringify(data) })
     .then(r => r.json())
     .then(res => {
