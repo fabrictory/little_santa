@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>2027 리틀산타 스텝 모집</title>
+<title>2026 리틀산타 스텝 모집</title>
 <meta name="description" content="아이들이 재능을 선물하는 리틀산타 재능마켓, 곁에서 함께할 자원 스텝을 찾습니다.">
-<meta property="og:title" content="2027 리틀산타 스텝 모집">
+<meta property="og:title" content="2026 리틀산타 스텝 모집">
 <meta property="og:description" content="아이들이 재능을 선물하는 리틀산타 재능마켓, 곁에서 함께할 자원 스텝을 찾습니다.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap">
 <style>
@@ -35,6 +35,12 @@ header{display:grid;gap:12px}
 .facts b{color:var(--red);font-weight:400;font-family:var(--display);margin-right:6px}
 .promise{border:2px dashed var(--pink);border-radius:14px;padding:18px 20px;background:var(--card);display:grid;gap:8px}
 .promise strong{color:var(--red)}
+.story{display:grid;gap:28px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px max(18px,4%)}
+.story section{gap:10px}
+.story h2{color:var(--red)}
+.story p{font-size:17px;line-height:1.85}
+ul.plain{margin:0;padding-left:20px;display:grid;gap:6px}
+ul.plain b{font-family:var(--display);font-weight:400;color:var(--red);margin-right:6px}
 .closed{border:2px solid var(--red);border-radius:14px;padding:18px 20px;background:var(--tint)}
 section{display:grid;gap:16px}
 .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
@@ -55,7 +61,7 @@ section{display:grid;gap:16px}
 .btn[disabled]{opacity:.6;cursor:wait}
 :focus-visible{outline:3px solid var(--olive);outline-offset:2px}
 .steps{display:grid;gap:0;padding:0;margin:0}
-.steps li{list-style:none;display:grid;grid-template-columns:110px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.steps li{list-style:none;display:grid;grid-template-columns:150px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
 .steps b{font-family:var(--display);font-weight:400;color:var(--red)}
 @media (max-width:480px){.steps li{grid-template-columns:1fr;gap:2px}}
 form{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:22px;display:grid;gap:22px}
@@ -92,34 +98,83 @@ footer{font-size:13px;color:var(--muted);text-align:center}
 <div class="stripe" aria-hidden="true"></div>
 <div class="wrap">
   <header>
-    <div class="eyebrow">LITTLE SANTA MARKET 2027 · 스텝 모집</div>
-    <h1>리틀산타를 뒤에서 돕는 산타를 찾습니다</h1>
-    <p class="lead">리틀산타 재능마켓에서는 아이들이 자기 재능을 꺼내 손님에게 선물합니다. 스텝은 그 선물이 손님에게 잘 닿도록 옆에서 돕는 사람입니다. 아이들은 스텝이 곁에 있다는 믿음으로 자기 자리를 지킵니다. 그래서 처음부터 끝까지 함께할 수 있는 분을 찾습니다.</p>
+    <div class="eyebrow">LITTLE SANTA MARKET 2026 · 스텝 모집</div>
+    <h1>2026 리틀산타 재능마켓 스텝 모집</h1>
     <div class="facts" id="facts"></div>
   </header>
 
   <div class="closed" id="closedBox" hidden><h2>스텝 모집이 마감되었습니다</h2><p>관심 가져 주셔서 고맙습니다. 다음 리틀산타에서 만나요.</p></div>
 
+  <article class="story">
+    <section>
+      <h2>크리스마스, 기쁨이 선물이 되는 날</h2>
+      <p>크리스마스는 아기 예수님의 탄생을 축하하며, 그 기쁨을 함께 나누는 날입니다. 누군가를 위해 선물을 고르고 건네는 마음은, 우리가 먼저 사랑받았기 때문에 생겨납니다. 받은 사랑을 다시 흘려보낼 때, 크리스마스의 기쁨은 더 멀리 퍼져 갑니다.</p>
+    </section>
+    <section>
+      <h2>산타의 시작, 성 니콜라스 이야기</h2>
+      <p>그렇게 사랑을 흘려보낸 한 사람의 이야기가 있습니다. 약 1,700년 전, 지금의 튀르키예 땅 '미라'라는 도시에 니콜라스라는 교회 지도자가 살았습니다. 전해지는 이야기에 따르면, 그는 가난 때문에 세 딸을 시집보낼 수 없던 이웃의 사정을 듣고 밤마다 몰래 그 집에 금주머니를 넣어 주었습니다. 자신을 드러내지 않고, 받은 사랑을 이웃에게 조용히 건넨 것입니다.</p>
+      <p>이 이야기가 오랜 시간 바다를 건너고 나라를 지나며, 오늘날의 산타클로스가 되었습니다. 산타의 시작은 선물을 받는 사람이 아니라, 받은 사랑을 나누는 사람이었습니다.</p>
+    </section>
+    <section>
+      <h2>나의 재능을 꺼내면, 누구나 산타가 될 수 있습니다</h2>
+      <p>리틀산타 재능마켓은 이 기쁨을 아이들과 함께 나누는 자리입니다. 아이들은 자신 안에 있는 재능을 선물로 꺼내 이웃에게 건네는 '리틀산타'가 됩니다. 따뜻한 응원 한마디, 정성껏 만든 작은 것 하나도 누군가에게는 크리스마스의 선물이 됩니다. 크리스마스가 선물을 받는 날만이 아니라, 선물을 주는 날이 되도록요.</p>
+    </section>
+    <section>
+      <h2>리틀산타의 곁을 지켜줄 스텝을 찾습니다</h2>
+      <p>아이들이 처음으로 '주는 기쁨'을 경험하는 순간, 그 곁에는 묵묵히 돕는 어른이 필요합니다. 니콜라스가 그랬듯, 보이지 않는 곳에서 선물이 잘 전해지도록 손을 보태 줄 분을 기다립니다. 여러분도 이번 크리스마스, 또 한 명의 산타가 되어 주세요.</p>
+    </section>
+  </article>
+
   <div class="promise">
-    <h2>먼저 꼭 읽어 주세요</h2>
-    <p>스텝 활동은 <strong>무보수 자원봉사</strong>입니다. 행사 수익은 스텝 이름 없이 <strong>리틀산타 아이들의 이름으로만</strong> 기부됩니다. 사전 교육 참석과 배정된 시간 전체 참여가 지원 조건입니다.</p>
+    <h2>꼭 알아주세요</h2>
+    <p>이번 리틀산타 스텝은 <strong>자원봉사</strong>로 함께합니다. 행사 수익은 <strong>재료비 실비를 제외한 전액</strong>을 기부하며, 기부에는 스텝의 이름 대신 <strong>아이들의 이름만</strong> 담아 전합니다. 니콜라스가 그랬듯, 이름 없이 건네는 선물이 되기를 바랍니다.</p>
   </div>
+
+  <section>
+    <h2>언제, 어디서 열리나요?</h2>
+    <ul class="plain">
+      <li><b>일시</b> 2026년 12월 12일(토) · 1부 11:00~13:00 / 2부 15:00~17:00</li>
+      <li>스텝은 행사 준비와 정리를 위해 1부 시작 전부터 2부 정리까지 함께해 주셔야 합니다. 정확한 집결 시간은 확정 안내 때 알려드립니다.</li>
+      <li><b>장소</b> 확정 후 안내</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>누가 지원할 수 있나요?</h2>
+    <ul class="plain">
+      <li>성인이라면 누구나 지원할 수 있습니다. (청소년 제외)</li>
+      <li>아이들을 존중하는 마음으로, 사전 교육부터 행사 당일까지 끝까지 함께해 주실 분을 찾습니다.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>어떻게 진행되나요?</h2>
+    <ol class="steps" id="scheduleList"></ol>
+    <p class="hint" id="contactLine"></p>
+  </section>
 
   <section>
     <h2>스텝은 무엇을 받고, 무엇을 받지 않나요?</h2>
     <div class="two">
       <div class="box yes"><h3>함께 드리는 것</h3>
-        <ul><li>사전 스텝 교육</li><li>스텝 앞치마와 명찰</li><li>활동 시간 중 식사 또는 간식</li><li>패브릭토리 활동 확인서</li></ul></div>
+        <ul><li>사전 스텝 교육 (온라인)</li><li>스텝 앞치마와 명찰</li><li>활동 시간 중 식사 또는 간식</li><li>패브릭토리 활동 확인서</li></ul></div>
       <div class="box no"><h3>드리지 않는 것</h3>
         <ul><li>활동비, 교통비</li><li>기부 명단·홍보물의 개인 이름 표기</li><li>1365 봉사시간 인증 (연계가 확정되면 따로 알려드립니다)</li></ul></div>
     </div>
   </section>
 
   <section id="roles">
-    <h2>어떤 일을 하게 되나요?</h2>
+    <h2>스텝은 어떤 일을 하나요?</h2>
+    <ul class="plain">
+      <li>리틀산타 아이들이 자신의 재능을 선물로 잘 건넬 수 있도록 곁에서 돕고 안내합니다.</li>
+      <li>담당 존에서 아이들을 살피고, 손님 맞이와 현장 운영을 함께합니다.</li>
+      <li>행사 전 아이들이 '주는 기쁨'을 미리 경험할 수 있도록 준비 과정을 돕습니다.</li>
+    </ul>
+    <p>아래 역할 중 내가 잘할 수 있는 자리를 골라 지원해 주세요.</p>
     <p class="hint">필요 인원은 예상치이며 행사 규모에 따라 바뀔 수 있습니다. 모든 스텝은 운영진(패브릭토리 강사진) 존 리더와 함께 움직입니다.</p>
     <div class="filters" role="group" aria-label="시간대로 보기">
       <button class="chip" type="button" data-f="all" aria-pressed="true">전체</button>
+      <button class="chip" type="button" data-f="준비" aria-pressed="false">준비 기간부터</button>
       <button class="chip" type="button" data-f="부" aria-pressed="false">행사 중 (1부·2부)</button>
       <button class="chip" type="button" data-f="세팅" aria-pressed="false">세팅·철수</button>
       <button class="chip" type="button" data-f="종일" aria-pressed="false">종일</button>
@@ -128,10 +183,10 @@ footer{font-size:13px;color:var(--muted);text-align:center}
   </section>
 
   <section>
-    <h2>지원하면 어떻게 진행되나요?</h2>
+    <h2>지원한 뒤에는 어떻게 되나요?</h2>
     <ol class="steps">
       <li><b>지원</b><span>아래 지원서를 제출하면 접수번호와 확인 메일이 갑니다.</span></li>
-      <li><b>배정 안내</b><span>지망 역할과 가능한 시간을 보고 배정해 연락드립니다. 1지망이 마감되면 2지망으로 배정됩니다.</span></li>
+      <li><b>배정 안내</b><span id="announceText">지망 역할과 가능한 시간을 보고 배정해 연락드립니다. 1지망이 마감되면 2지망으로 배정됩니다.</span></li>
       <li><b>확정 회신</b><span id="confirmText">배정 안내를 받으면 기한 안에 확정 회신을 주세요. 기한이 지나면 대기자에게 자리가 넘어갑니다.</span></li>
       <li><b>사전 교육</b><span>리틀산타 이야기, 아이를 대하는 원칙, 내 역할의 동선을 익힙니다. 교육 참석으로 최종 확정됩니다.</span></li>
       <li><b>행사 당일</b><span>배정된 시간 30분 전에 도착해 앞치마와 명찰을 받고 존 리더와 인사합니다.</span></li>
@@ -149,9 +204,8 @@ footer{font-size:13px;color:var(--muted);text-align:center}
           <div class="field"><label class="req" for="email">이메일</label><input id="email" type="email" autocomplete="email" placeholder="접수 확인 메일을 보내드려요"></div>
           <div class="field"><label for="region">사는 지역 <span class="hint">(구 단위, 선택)</span></label><input id="region" type="text" placeholder="예: 서울 은평구"></div>
         </div>
-        <fieldset class="checks"><legend class="req">나이</legend>
-          <label><input type="radio" name="age" id="age-adult" value="성인"> 성인 (만 19세 이상)</label>
-          <label id="teenRow"><input type="radio" name="age" id="age-teen" value="청소년"> 청소년 (만 14~18세 · 보호자 동의서를 따로 받고, 성인 스텝과 짝으로 배치됩니다)</label>
+        <fieldset class="checks"><legend class="req">나이 확인</legend>
+          <label><input type="checkbox" id="age-ok"> 만 19세 이상입니다. (이번 스텝 모집은 성인만 지원할 수 있습니다)</label>
         </fieldset>
       </div>
 
@@ -200,7 +254,7 @@ footer{font-size:13px;color:var(--muted);text-align:center}
     <div class="done" id="done" hidden>
       <h2>지원이 접수되었습니다</h2>
       <div class="no" id="doneNo"></div>
-      <p>입력한 이메일로 접수 확인 메일을 보냈습니다. 지원서를 검토해 배정 안내를 드릴게요. 배정 안내를 받으면 <span id="doneDays"></span>일 안에 확정 회신을 주세요.</p>
+      <p>입력한 이메일로 접수 확인 메일을 보냈습니다. 지원서를 검토해 <span id="doneAnnounce"></span>배정 안내를 드릴게요. 배정 안내를 받으면 <span id="doneDays"></span>일 안에 확정 회신을 주세요.</p>
       <p class="hint" id="doneContact"></p>
     </div>
   </section>
@@ -217,20 +271,34 @@ const CFG = {
   // ① 구글 Apps Script 웹 앱 주소 (…/exec 로 끝나는 주소)를 따옴표 안에 붙여넣으세요.
   endpoint: 'https://script.google.com/macros/s/AKfycbygmcz872mRunbHz0kwDf1P11Qu8HkJFhkiGX_tuE9aSdp_14bIi48OrvAuASaMXEcJ/exec',
 
-  eventName: '2027 리틀산타 재능마켓',
-  eventDate: '',            // 예: '2027년 12월 11일(토)'
-  place: '',                // 예: '원유로프로젝트 북가좌 A동 1·2층'
-  sessionTimes: { '1부': '', '2부': '' },   // 예: '오전 11시 ~ 오후 1시'
-  closeAt: '',              // 모집 마감. 예: '2027-11-14T23:59:00+09:00' (Code.gs 와 같은 값)
-  trainingDates: [],        // 사전 교육 일정. 예: ['11월 27일(토) 오전 10시 · 온라인 줌']
+  eventName: '2026 리틀산타 재능마켓',
+  eventDate: '2026년 12월 12일(토)',
+  place: '미정 (확정 후 안내 예정)',
+  sessionTimes: { '1부': '11:00~13:00', '2부': '15:00~17:00' },
+  closeAt: '2026-10-30T23:59:00+09:00',   // 스텝 모집 마감 (Code.gs 와 같은 값)
+  trainingDates: [],        // 사전 교육 날짜가 정해지면 넣으세요. 예: ['11월 21일(토) 오전 10시 · 온라인']
+  trainingNote: '온라인 (추후 일정 안내)',
   confirmDays: 3,           // 배정 안내 후 확정 회신 기한(일)
   cancelNoticeDays: 7,      // 불참 시 며칠 전까지 알려야 하는지
-  acceptTeens: true,        // 청소년 스텝(만 14~18세)을 받을지
-  contact: '',              // 문의처. 예: '카카오톡 채널 @패브릭토리'
+  contact: '010-4262-6107',
   dataRetention: '행사 종료 후 6개월',
+  announceDate: '11월 1일(일)',   // 스텝 확정 안내일
+
+  // 전체 일정 (페이지의 '일정' 표에 그대로 보입니다)
+  schedule: [
+    ['10.26(월) ~ 10.30(금)', '스텝 모집'],
+    ['11.1(일)', '스텝 확정 안내'],
+    ['11.2(월) ~ 11.6(금)', '리틀산타 모집'],
+    ['11.11(수)', '리틀산타 확정 안내'],
+    ['추후 안내', '스텝 사전 교육 (온라인)'],
+    ['12.12(토)', '리틀산타 재능마켓']
+  ],
 
   // 역할 이름을 바꾸면 Code.gs 의 roles 목록도 똑같이 바꿔 주세요.
   roles: [
+    { id: 'mentor', name: '산타 멘토', tag: '리틀산타 관리·교육', when: '11월 준비 기간 ~ 행사 당일', f: '준비', where: '온라인 준비 모임, 행사장', need: '리틀산타 4~5명당 1명',
+      tasks: ['리틀산타 4~5명 모둠을 맡아 행사까지 함께하기', '준비 모임에서 아이가 자기 재능을 찾고 메뉴판·포스터를 만들도록 돕기', '보호자에게 준비물과 일정 안내, 준비 상황 확인', '행사 당일 담당 아이들의 컨디션과 자리를 살피고 존 리더와 소통하기', '아이 대신 해주지 않고, 아이가 스스로 선물을 건네도록 기다려 주기'],
+      fit: '아이를 가르치거나 돌본 경험이 있는 분, 준비 기간에도 꾸준히 시간을 낼 수 있는 분 (멘토 교육 1회 추가)' },
     { id: 'welcome', name: '웰컴 산타', tag: '접수·티켓', when: '1부·2부', f: '부', where: '1층 인포', need: '부당 3명',
       tasks: ['입장 티켓 확인과 현장 판매', '선물 사인카드(리틀산타 5명) 나눠 주며 이용 방법 안내', '셀러 아이·보호자 도착 확인 후 존 리더에게 연결'],
       fit: '처음 오는 손님에게 밝게 설명하는 일이 편한 분' },
@@ -277,9 +345,9 @@ CFG.agreements = [
     body: '활동비와 교통비는 없습니다. 식사 또는 간식, 스텝 앞치마와 명찰, 패브릭토리 활동 확인서를 드립니다.' },
   { id: 'name', title: '기부는 아이들 이름으로만 합니다',
     body: '행사 수익은 리틀산타 아이들의 이름으로 기부됩니다. 기부 명단, 현수막, 홍보물에 스텝 개인 이름은 들어가지 않습니다.' },
-  { id: 'training', title: '사전 교육에 반드시 참석합니다',
+  { id: 'training', title: '온라인 사전 교육에 참여하겠습니다',
     body: '사전 교육에서 리틀산타 이야기, 아이를 대하는 원칙, 역할별 동선을 익힙니다. 교육에 참석하지 않으면 배정이 취소됩니다.' },
-  { id: 'full', title: '배정된 시간을 처음부터 끝까지 지킵니다',
+  { id: 'full', title: '행사 당일 정해진 시간 동안 끝까지 함께하겠습니다',
     body: '시작 30분 전에 도착하고, 배정된 시간 중간에 자리를 비우거나 먼저 떠나지 않습니다. 아이들은 스텝이 있다는 전제로 자기 자리를 지킵니다.' },
   { id: 'confirm', title: '배정 안내를 받으면 ' + CFG.confirmDays + '일 안에 확정 회신합니다',
     body: '기한 안에 회신이 없으면 대기자에게 자리가 넘어갑니다.' },
@@ -287,8 +355,10 @@ CFG.agreements = [
     body: '그래야 대기자를 배정하고 아이들 곁을 비우지 않을 수 있습니다. 연락 없이 불참하면 다음 회차 스텝 모집에서 제외됩니다.' },
   { id: 'child', title: '아이가 주인공입니다',
     body: '아이의 재능 선물을 대신 만들지 않고, 잘하고 못하고를 평가하거나 다른 아이와 비교하지 않습니다. 아이와 단둘이 있지 않고 스텝 2인 1조로 움직입니다.' },
-  { id: 'photo', title: '아이들의 사진과 정보를 밖으로 가져가지 않습니다',
+  { id: 'photo', title: '행사 중 알게 된 아이들과 가족의 정보를 외부에 공유하지 않습니다',
     body: '행사 중 찍은 아이들 사진과 영상, 아이와 가족에 대해 알게 된 정보를 개인 SNS나 메신저에 올리거나 전하지 않습니다.' },
+  { id: 'record', title: '행사 기록용 사진·영상 촬영에 동의합니다',
+    body: '스텝 활동 모습이 행사 기록 사진과 영상에 담길 수 있습니다. 기록물은 리틀산타와 패브릭토리의 활동 소개에 쓰입니다.' },
   { id: 'check', title: '성범죄경력 조회에 동의합니다',
     body: '아이들과 직접 만나는 활동이므로, 배정이 확정되면 본인 동의서를 받아 조회합니다. 조회 방법은 확정 안내 때 알려드립니다.' },
   { id: 'privacy', title: '개인정보 수집·이용에 동의합니다',
@@ -302,14 +372,17 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":
 
 // 상단 정보
 const facts = [];
-if (CFG.eventDate) facts.push(['일시', CFG.eventDate]);
-if (CFG.place) facts.push(['장소', CFG.place]);
+if (CFG.eventDate) facts.push(['행사', CFG.eventDate]);
 Object.keys(CFG.sessionTimes).forEach(k => { if (CFG.sessionTimes[k]) facts.push([k, CFG.sessionTimes[k]]); });
-if (CFG.closeAt) facts.push(['모집 마감', new Date(CFG.closeAt).toLocaleString('ko-KR', {month:'long', day:'numeric', weekday:'short', hour:'numeric', minute:'2-digit'})]);
+if (CFG.place) facts.push(['장소', CFG.place]);
+if (CFG.closeAt) facts.push(['스텝 모집 마감', new Date(CFG.closeAt).toLocaleString('ko-KR', {month:'long', day:'numeric', weekday:'short', hour:'numeric', minute:'2-digit'})]);
+if (CFG.contact) facts.push(['문의', CFG.contact]);
+$('scheduleList').innerHTML = (CFG.schedule || []).map(r => '<li><b>' + esc(r[0]) + '</b><span>' + esc(r[1]) + '</span></li>').join('');
+$('contactLine').textContent = CFG.contact ? '궁금한 점은 ' + CFG.contact + '로 문의해 주세요.' : '';
+$('announceText').textContent = '지망 역할과 가능한 시간을 보고 배정해 ' + (CFG.announceDate ? CFG.announceDate + '에 ' : '') + '연락드립니다. 1지망이 마감되면 2지망으로 배정됩니다.';
 $('facts').innerHTML = facts.map(f => '<span><b>' + esc(f[0]) + '</b>' + esc(f[1]) + '</span>').join('');
 $('confirmText').textContent = '배정 안내를 받으면 ' + CFG.confirmDays + '일 안에 확정 회신을 주세요. 기한이 지나면 대기자에게 자리가 넘어갑니다.';
 if (CFG.closed) { $('closedBox').hidden = false; $('apply').hidden = true; }
-if (!CFG.acceptTeens) $('teenRow').hidden = true;
 
 // 역할 카드
 function renderRoles(filter) {
@@ -340,13 +413,16 @@ $('roleList').addEventListener('click', e => {
 });
 
 const timeLabel = k => CFG.sessionTimes[k] ? k + ' (' + CFG.sessionTimes[k] + ')' : k;
-const times = ['전날·당일 오전 세팅', '1부', '2부', '행사 후 철수'];
+const times = ['11월 준비 기간 (산타 멘토)', '전날·당일 오전 세팅', '1부', '2부', '행사 후 철수'];
 $('timeList').innerHTML = times.map((t, i) =>
   '<label><input type="checkbox" name="time" id="time-' + i + '" value="' + esc(t) + '"> ' + esc(CFG.sessionTimes[t] !== undefined ? timeLabel(t) : t) + '</label>').join('');
 
 if (CFG.trainingDates.length) {
   $('trainingList').innerHTML = CFG.trainingDates.map((t, i) =>
     '<label><input type="checkbox" name="training" id="training-' + i + '" value="' + esc(t) + '"> ' + esc(t) + '</label>').join('');
+} else if (CFG.trainingNote) {
+  $('trainingList').innerHTML = '<p class="hint">' + esc(CFG.trainingNote) + '. 일정이 정해지면 배정 안내와 함께 알려드립니다.</p>';
+  $('trainingSet').querySelector('legend').classList.remove('req');
 } else {
   $('trainingSet').hidden = true;
 }
@@ -397,7 +473,7 @@ $('f').addEventListener('submit', e => {
   const agreed = {}; document.querySelectorAll('.agc').forEach(c => agreed[c.dataset.id] = c.checked);
   const data = {
     name: val('name'), phone: val('phone'), email: val('email'), region: val('region'),
-    age: checked('age')[0] === '청소년' ? '청소년 (보호자 동의 필요)' : (checked('age')[0] || ''),
+    age: $('age-ok').checked ? '성인 (만 19세 이상)' : '',
     role1: roleName($('r1').value), role2: roleName($('r2').value),
     times: checked('time'), trainings: checked('training'), route: checked('route')[0] || '',
     motive: val('motive'), scenario: checked('scenario')[0] || '', skill: val('skill'), message: val('message'),
@@ -412,7 +488,7 @@ $('f').addEventListener('submit', e => {
   need(data.name, $('name'), '이름을 적어 주세요.');
   need(data.phone.replace(/\D/g, '').length >= 9, $('phone'), '연락처를 010-0000-0000 형식으로 적어 주세요.');
   need(/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email), $('email'), '이메일 주소를 확인해 주세요. 접수 확인 메일이 이 주소로 갑니다.');
-  need(data.age, fsOf('age-adult'), '나이를 골라 주세요.');
+  need(data.age, fsOf('age-ok'), '만 19세 이상인 분만 지원할 수 있습니다. 확인란에 체크해 주세요.');
   need(data.role1, $('r1'), '1지망 역할을 골라 주세요.');
   need(data.times.length, fsOf('timeList'), '참여할 수 있는 시간을 하나 이상 골라 주세요.');
   if (CFG.trainingDates.length) need(data.trainings.length, $('trainingSet'), '참석할 수 있는 사전 교육 일정을 골라 주세요.');
@@ -446,6 +522,7 @@ $('f').addEventListener('submit', e => {
       $('f').hidden = true;
       $('doneNo').textContent = '접수번호 ' + res.no;
       $('doneDays').textContent = CFG.confirmDays;
+      $('doneAnnounce').textContent = CFG.announceDate ? CFG.announceDate + '에 ' : '';
       $('doneContact').textContent = CFG.contact ? '문의: ' + CFG.contact : '';
       $('done').hidden = false;
       $('done').scrollIntoView({behavior:'smooth', block:'center'});
