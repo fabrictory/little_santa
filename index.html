@@ -32,8 +32,8 @@ p{margin:0;max-width:65ch}
 .eyebrow{font-size:13px;letter-spacing:.08em;color:var(--olive)}
 header{display:grid;gap:12px}
 .lead,.story .lead{font-size:18px;line-height:1.7;max-width:34em}
-.intro{display:grid;gap:8px;padding-bottom:18px;margin-bottom:6px;border-bottom:1px dashed var(--line)}
-.story .intro-title{font-family:var(--display);font-size:clamp(26px,5.5vw,34px);color:var(--red);line-height:1.3;word-break:keep-all;margin:0}
+.story .story-title{font-size:clamp(26px,5.5vw,34px);word-break:keep-all}
+.story .invite{font-family:var(--display);font-size:20px;color:var(--red);word-break:keep-all;padding-top:6px}
 .facts{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:15px}
 .facts b{color:var(--red);font-weight:400;font-family:var(--display);margin-right:6px}
 .promise{border:2px dashed var(--pink);border-radius:14px;padding:18px 20px;background:var(--card);display:grid;gap:8px}
@@ -41,7 +41,7 @@ header{display:grid;gap:12px}
 .story{display:grid;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px max(18px,4%)}
 .story section{gap:10px}
 .story h2{color:var(--red)}
-.story p{font-size:17px;line-height:1.85}
+.story p{font-size:17px;line-height:1.85;word-break:keep-all}
 ul.plain{margin:0;padding-left:20px;display:grid;gap:6px}
 ul.plain b{font-family:var(--display);font-weight:400;color:var(--red);margin-right:6px}
 .closed{border:2px solid var(--red);border-radius:14px;padding:18px 20px;background:var(--tint)}
@@ -109,13 +109,10 @@ footer{font-size:13px;color:var(--muted);text-align:center}
   <div class="closed" id="closedBox" hidden><h2>스텝 모집이 마감되었습니다</h2><p>관심 가져 주셔서 고맙습니다. 다음 리틀산타에서 만나요.</p></div>
 
   <article class="story">
-    <div class="intro">
-      <p class="intro-title">예수님의 사랑을 전하는 리틀산타</p>
-      <p class="lead">올해 크리스마스에는 선물을 기다리는 대신, 산타가 되어 누군가에게 선물을 전해 보는 건 어떨까요?</p>
-    </div>
-    <h2>리틀산타의 곁을 지켜줄 산타를 찾습니다</h2>
-    <p>크리스마스는 아기 예수님의 탄생을 축하하며, 받은 사랑을 나누는 날입니다. 약 1,700년 전 성 니콜라스는 예수님께 받은 사랑을 흘려보내며, 가난한 이웃의 집에 밤마다 몰래 금주머니를 넣어 주었다고 전해집니다. 이 이야기가 오늘날의 산타클로스가 되었습니다.</p>
-    <p>리틀산타 재능마켓에서는 아이들이 자신의 재능을 선물로 꺼내 이웃에게 건넵니다. 그 곁에서 이름 없이, 묵묵히 손을 보태 줄 또 한 명의 산타가 되어 주세요.</p>
+    <h2 class="story-title">예수님의 사랑을 전하는 리틀산타</h2>
+    <p>크리스마스는 아기 예수님의 탄생을 기뻐하며 받은 사랑을 나누는 날입니다. 약 1,700년 전, 성 니콜라스는 예수님께 받은 사랑을 이웃에게 흘려보냈습니다. 가난한 이웃의 집에 밤마다 몰래 금주머니를 두고 갔다고 전해지는 그의 이야기는 오늘날의 산타클로스가 되었습니다.</p>
+    <p>리틀산타 재능마켓에서는 아이들이 그 산타가 됩니다. 아이들은 자신의 재능을 선물로 꺼내 이웃에게 건넵니다. 그리고 그 곁에는 아이들의 선물이 잘 전해지도록 이름 없이 손을 보태 줄 어른 산타가 필요합니다.</p>
+    <p class="invite">올해 크리스마스에는 선물을 기다리는 대신, 리틀산타의 곁을 지키는 산타가 되어 주시겠어요?</p>
   </article>
 
   <div class="promise">
