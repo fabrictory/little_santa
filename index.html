@@ -26,13 +26,14 @@ body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:
 .wrap{max-width:880px;margin:0 auto;display:grid;gap:40px;padding:36px max(16px,env(safe-area-inset-right,0px)) 48px max(16px,env(safe-area-inset-left,0px))}
 h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;word-break:keep-all;margin:0;line-height:1.3}
 .lead{word-break:keep-all}
-h1{font-size:clamp(32px,7vw,50px);color:var(--red)}
+h1{font-size:clamp(30px,6vw,44px);color:var(--red)}
 h2{font-size:24px} h3{font-size:19px}
 p{margin:0;max-width:65ch}
-.eyebrow{font-size:14px;letter-spacing:.18em;color:var(--olive);font-weight:700}
+.eyebrow{font-size:13px;letter-spacing:.08em;color:var(--olive)}
 header{display:grid;gap:12px}
-.lead{font-size:19px;line-height:1.7;max-width:34em}
-.sub{font-family:var(--display);font-size:20px;color:var(--ink);border-top:1px dashed var(--line);padding-top:12px;margin-top:4px}
+.lead,.story .lead{font-size:18px;line-height:1.7;max-width:34em}
+.intro{display:grid;gap:8px;padding-bottom:18px;margin-bottom:6px;border-bottom:1px dashed var(--line)}
+.story .intro-title{font-family:var(--display);font-size:clamp(26px,5.5vw,34px);color:var(--red);line-height:1.3;word-break:keep-all;margin:0}
 .facts{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:15px}
 .facts b{color:var(--red);font-weight:400;font-family:var(--display);margin-right:6px}
 .promise{border:2px dashed var(--pink);border-radius:14px;padding:18px 20px;background:var(--card);display:grid;gap:8px}
@@ -100,16 +101,18 @@ footer{font-size:13px;color:var(--muted);text-align:center}
 <div class="stripe" aria-hidden="true"></div>
 <div class="wrap">
   <header>
-    <div class="eyebrow">LITTLE SANTA MARKET</div>
-    <h1>예수님의 사랑을 전하는 리틀산타</h1>
-    <p class="lead">올해 크리스마스에는 선물을 기다리는 대신, 산타가 되어 누군가에게 선물을 전해 보는 건 어떨까요?</p>
-    <p class="sub">2026 리틀산타 재능마켓 스텝 모집</p>
+    <div class="eyebrow">LITTLE SANTA MARKET 2026 · 스텝 모집</div>
+    <h1>2026 리틀산타 재능마켓 스텝 모집</h1>
     <div class="facts" id="facts"></div>
   </header>
 
   <div class="closed" id="closedBox" hidden><h2>스텝 모집이 마감되었습니다</h2><p>관심 가져 주셔서 고맙습니다. 다음 리틀산타에서 만나요.</p></div>
 
   <article class="story">
+    <div class="intro">
+      <p class="intro-title">예수님의 사랑을 전하는 리틀산타</p>
+      <p class="lead">올해 크리스마스에는 선물을 기다리는 대신, 산타가 되어 누군가에게 선물을 전해 보는 건 어떨까요?</p>
+    </div>
     <h2>리틀산타의 곁을 지켜줄 산타를 찾습니다</h2>
     <p>크리스마스는 아기 예수님의 탄생을 축하하며, 받은 사랑을 나누는 날입니다. 약 1,700년 전 성 니콜라스는 예수님께 받은 사랑을 흘려보내며, 가난한 이웃의 집에 밤마다 몰래 금주머니를 넣어 주었다고 전해집니다. 이 이야기가 오늘날의 산타클로스가 되었습니다.</p>
     <p>리틀산타 재능마켓에서는 아이들이 자신의 재능을 선물로 꺼내 이웃에게 건넵니다. 그 곁에서 이름 없이, 묵묵히 손을 보태 줄 또 한 명의 산타가 되어 주세요.</p>
