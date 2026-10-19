@@ -41,6 +41,9 @@ header{display:grid;gap:12px}
 .facts b{color:var(--red);font-weight:400;font-family:var(--display);margin-right:6px}
 .promise{border:2px dashed var(--pink);border-radius:14px;padding:18px 20px;background:var(--card);display:grid;gap:8px}
 .promise strong{color:var(--red)}
+.film{margin:0;display:grid;gap:8px}
+.film video{width:100%;aspect-ratio:16/9;border-radius:14px;background:#2a0d12;display:block}
+.film figcaption{font-size:13px;color:var(--muted);text-align:center}
 .story{display:grid;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px max(18px,4%)}
 .story section{gap:10px}
 .story h2{color:var(--red)}
@@ -110,6 +113,13 @@ footer{font-size:13px;color:var(--muted);text-align:center}
   </header>
 
   <div class="closed" id="closedBox" hidden><h2>스텝 모집이 마감되었습니다</h2><p>관심 가져 주셔서 고맙습니다. 다음 리틀산타에서 만나요.</p></div>
+
+  <figure class="film">
+    <video controls playsinline preload="metadata" poster="poster.jpg">
+      <source src="little-santa.mp4" type="video/mp4">
+    </video>
+    <figcaption>소리를 켜고 봐 주세요 · 1분</figcaption>
+  </figure>
 
   <article class="story">
     <h2 class="story-title">예수님의 사랑을 전하는 리틀산타</h2>
