@@ -33,6 +33,9 @@ p{margin:0;max-width:65ch}
 header{display:grid;gap:12px}
 .lead,.story .lead{font-size:18px;line-height:1.7;max-width:34em}
 .story .story-title{font-size:clamp(26px,5.5vw,34px);word-break:keep-all}
+.quote{margin:4px 0;padding:14px 18px;border-left:4px solid var(--pink);background:var(--tint);border-radius:0 10px 10px 0;display:grid;gap:6px}
+.story .quote p{font-family:var(--display);font-size:18px;line-height:1.7;color:var(--ink)}
+.quote cite{font-style:normal;font-size:13px;color:var(--muted)}
 .story .invite{font-family:var(--display);font-size:20px;color:var(--red);word-break:keep-all;padding-top:6px}
 .facts{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:15px}
 .facts b{color:var(--red);font-weight:400;font-family:var(--display);margin-right:6px}
@@ -110,9 +113,14 @@ footer{font-size:13px;color:var(--muted);text-align:center}
 
   <article class="story">
     <h2 class="story-title">예수님의 사랑을 전하는 리틀산타</h2>
-    <p>크리스마스는 아기 예수님의 탄생을 기뻐하며 받은 사랑을 나누는 날입니다. 약 1,700년 전, 성 니콜라스는 예수님께 받은 사랑을 이웃에게 흘려보냈습니다. 가난한 이웃의 집에 밤마다 몰래 금주머니를 두고 갔다고 전해지는 그의 이야기는 오늘날의 산타클로스가 되었습니다.</p>
-    <p>리틀산타 재능마켓에서는 아이들이 그 산타가 됩니다. 아이들은 자신의 재능을 선물로 꺼내 이웃에게 건넵니다. 그리고 그 곁에는 아이들의 선물이 잘 전해지도록 이름 없이 손을 보태 줄 어른 산타가 필요합니다.</p>
-    <p class="invite">올해 크리스마스에는 선물을 기다리는 대신, 리틀산타의 곁을 지키는 산타가 되어 주시겠어요?</p>
+    <p>크리스마스는 아기 예수님의 탄생을 기뻐하며 받은 사랑을 나누는 날입니다. 산타클로스의 시작이 된 성 니콜라스도 약 1,700년 전, 예수님께 받은 사랑을 이웃에게 흘려보냈습니다. 가난한 이웃의 집에 밤마다 몰래 금주머니를 두고 갔다는 그의 이야기는 지금까지 전해지고 있지요.</p>
+    <blockquote class="quote">
+      <p>“선물은 크게 두 가지가 있단다.<br>하나는 사람이 준 선물이고, 또 하나는 하늘이 준 ‘재능’이라는 선물이지.”</p>
+      <cite>그림책 〈리틀산타〉 중에서</cite>
+    </blockquote>
+    <p>우리는 누구나 하늘로부터 ‘재능’이라는 선물을 받았습니다. 리틀산타 재능마켓은 아이들이 그 재능을 꺼내 이웃에게 선물하는 ‘키즈셀러’가 되고, 어른들은 그 선물을 기쁘게 받는 손님이 되는 크리스마스 마켓입니다. 받은 선물을 다시 나눌 때, 크리스마스는 ‘선물을 받는 날’에서 ‘선물을 주는 날’이 됩니다.</p>
+    <p>처음 누군가에게 선물을 건네는 아이의 손은 조금 떨리기도 합니다. 그 작은 손이 끝까지 용기를 낼 수 있도록, 곁에서 기다려 주고 눈을 맞추며 응원해 줄 어른이 필요합니다.</p>
+    <p class="invite">올해 크리스마스에는 선물을 기다리는 대신, 산타가 된 아이들의 산타가 되어 주시겠어요?</p>
   </article>
 
   <div class="promise">
