@@ -6,6 +6,8 @@
 <title>2026 리틀산타 스텝 모집</title>
 <meta name="description" content="Let Your Light Shine! 재능을 꺼내 선물하는 리틀산타. 2026 리틀산타 재능마켓에서 아이들 곁을 지킬 자원 스텝을 찾습니다.">
 <meta property="og:title" content="2026 리틀산타 스텝 모집">
+<meta property="og:url" content="https://fabrictory.github.io/little_santa/">
+<meta property="og:image" content="https://fabrictory.github.io/little_santa/poster.jpg">
 <meta property="og:description" content="Let Your Light Shine! 재능을 꺼내 선물하는 리틀산타. 2026 리틀산타 재능마켓에서 아이들 곁을 지킬 자원 스텝을 찾습니다.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&display=swap">
 <style>
@@ -20,7 +22,7 @@
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html,body{margin:0}
-body{background:#140708;color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.7}
+body{background:#140708;color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.7;word-break:keep-all;overflow-wrap:anywhere}
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.07;mix-blend-mode:multiply;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
 .stripe{display:none}
@@ -31,7 +33,7 @@ h1,h2,h3{font-family:var(--display);font-weight:700;text-wrap:balance;word-break
 h1{font-size:clamp(30px,6vw,44px);color:var(--red)}
 h2{font-size:24px} h3{font-size:19px}
 p{margin:0;max-width:65ch}
-.eyebrow{font-family:var(--serif-en);font-size:15px;letter-spacing:.22em;color:#9a7638}
+.eyebrow{font-family:var(--serif-en);font-size:15px;letter-spacing:.22em;color:#7d5d28}
 header{display:grid;gap:12px}
 .lead,.story .lead{font-size:18px;line-height:1.7;max-width:34em}
 .story .story-title{font-size:clamp(26px,5.5vw,34px);word-break:keep-all}
@@ -75,6 +77,8 @@ header{display:grid;gap:12px}
 .givebox form{border-width:1px}
 .acct{display:grid;gap:4px;padding:14px 16px;border-radius:10px;background:var(--tint);border:1px solid var(--gold)}
 .acct .num{font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:.03em;color:var(--red)}
+.acct .hint{color:#5f4b43}
+.ag.opt{border-style:dashed}
 .acct .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 footer .spark{color:var(--gold)}
 .facts{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:15px}
@@ -144,7 +148,7 @@ footer{font-family:var(--serif-en);font-size:16px;letter-spacing:.06em;color:var
 </style>
 </head>
 <body>
-<div class="stage" role="img" aria-label="올해의 주제: Let Your Light Shine! 재능을 꺼내 선물하는 리틀산타">
+<div class="stage">
   <div class="valance" aria-hidden="true"></div>
   <div class="curtain l" aria-hidden="true"></div><div class="curtain r" aria-hidden="true"></div>
   <div class="sky" aria-hidden="true">
@@ -157,7 +161,7 @@ footer{font-family:var(--serif-en);font-size:16px;letter-spacing:.06em;color:var
     <p class="en">LET YOUR<br>LIGHT SHINE!</p>
     <div class="rule" aria-hidden="true"></div>
     <p class="ko">재능을 꺼내 선물하는 리틀산타</p>
-    <p class="verse">“Let your light shine before others.” <span>— Matthew 5:16</span></p>
+    <p class="verse">“…let your light shine before others…” <span>— Matthew 5:16</span></p>
     <div class="candles" aria-hidden="true"><span style="--h:26px;--d:.3s"></span><span style="--h:40px;--d:.9s"></span><span style="--h:32px"></span><span style="--h:52px;--d:.5s"></span><span style="--h:32px;--d:1.2s"></span><span style="--h:40px;--d:.2s"></span><span style="--h:26px;--d:.7s"></span></div>
   </div>
 </div>
@@ -199,7 +203,7 @@ footer{font-family:var(--serif-en);font-size:16px;letter-spacing:.06em;color:var
     <h2>언제, 어디서 열리나요?</h2>
     <ul class="plain">
       <li><b>일시</b> 2026년 12월 12일(토) · 1부 11:00~13:00 / 2부 15:00~17:00</li>
-      <li>모든 스텝은 <b>1부와 2부 모두</b> 함께하며, 행사 전 <b>세팅</b> 또는 행사 후 <b>철수</b> 중 한 가지 이상에 꼭 함께해 주셔야 합니다. 정확한 집결 시간은 확정 안내 때 알려드립니다.</li>
+      <li>모든 스텝은 <b>1부와 2부 모두</b> 함께하며, 행사 전 <b>세팅</b> 또는 행사 후 <b>철수</b> 중 한 가지 이상에 꼭 함께해 주셔야 합니다. 정확한 집결 시간은 확정 안내 때 알려드립니다. 세팅이나 철수에 함께하면 오전부터 저녁까지 하루를 함께하게 되니, 하루 일정을 비워 두고 지원해 주세요. 1부와 2부 사이 시간 계획과 식사 안내도 확정 안내 때 드립니다.</li>
       <li><b>장소</b> 서울 (확정 후 안내)</li>
     </ul>
   </section>
@@ -241,7 +245,6 @@ footer{font-family:var(--serif-en);font-size:16px;letter-spacing:.06em;color:var
       <button class="chip" type="button" data-f="all" aria-pressed="true">전체</button>
       <button class="chip" type="button" data-f="준비" aria-pressed="false">준비 기간부터</button>
       <button class="chip" type="button" data-f="부" aria-pressed="false">행사 중 (1부·2부)</button>
-      <button class="chip" type="button" data-f="종일" aria-pressed="false">종일</button>
     </div>
     <div class="roles" id="roleList"></div>
   </section>
@@ -312,6 +315,8 @@ footer{font-family:var(--serif-en);font-size:16px;letter-spacing:.06em;color:var
         <div class="allrow"><h3>지원 전에 이해하고 동의해 주세요</h3><button type="button" class="linkbtn" id="checkAll">모두 읽었고 동의합니다</button></div>
         <p class="hint">한 항목이라도 동의하지 않으면 지원할 수 없습니다. 하나씩 읽어 주세요.</p>
         <div class="agree" id="agreeList"></div>
+        <div class="ag opt"><label><input type="checkbox" id="photoOk"> (선택) 스텝 활동 모습의 촬영과 활동 소개 활용에 동의합니다</label>
+          <p>스텝 활동 모습이 행사 기록 사진·영상에 담길 수 있으며, 리틀산타와 패브릭토리의 활동 소개에 쓰입니다. 삭제를 요청하시면 바로 지웁니다. 동의하지 않아도 지원할 수 있으며, 촬영 때 얼굴이 나오지 않게 배려합니다.</p></div>
       </div>
 
       <div aria-hidden="true" style="position:absolute;left:-9999px"><label for="website">웹사이트</label><input id="website" type="text" tabindex="-1" autocomplete="off"></div>
@@ -329,7 +334,7 @@ footer{font-family:var(--serif-en);font-size:16px;letter-spacing:.06em;color:var
 
   <section class="give" id="support">
     <h2>리틀산타를 함께 응원하고 싶으신가요?</h2>
-    <p>스텝으로 함께하기 어려워도, 물품이나 협찬으로 리틀산타를 응원하실 수 있습니다. 보내 주신 마음은 아이들이 재능을 선물하는 하루를 위해 소중히 쓰겠습니다.</p>
+    <p>스텝으로 함께하기 어려워도, 물품이나 후원금으로 리틀산타를 응원하실 수 있습니다. 보내 주신 마음은 아이들이 재능을 선물하는 하루를 위해 소중히 쓰겠습니다. 후원해 주신 분과 기관의 이름은 따로 표기하지 않고, 아이들의 이름으로만 전합니다.</p>
     <button class="btn open" type="button" id="giveOpen" aria-expanded="false" aria-controls="giveBox">✦ 응원·후원 신청하기</button>
     <div class="givebox" id="giveBox" hidden>
       <form id="gf" novalidate>
@@ -341,8 +346,9 @@ footer{font-family:var(--serif-en);font-size:16px;letter-spacing:.06em;color:var
         </fieldset>
         <div class="acct">
           <span class="hint">후원금 계좌</span>
-          <div class="row"><span class="num" id="acctNum">국민 76230104274366</span><button type="button" class="linkbtn" id="acctCopy">계좌번호 복사</button></div>
+          <div class="row"><span class="num">국민은행 <span id="acctNum">762301-04-274366</span></span><button type="button" class="linkbtn" id="acctCopy">계좌번호 복사</button></div>
           <span>예금주 패브릭토리(임한나)</span>
+          <p class="hint">후원금은 행사 운영 실비(재료·간식 등)에 먼저 쓰이고, 남은 금액은 행사 수익과 함께 아이들의 이름으로 기부됩니다. 기부금영수증(세액공제)은 발급되지 않습니다. 공식 후원 계좌는 이 계좌 하나뿐이니, 다른 계좌 안내를 받으시면 010-4262-6107로 꼭 확인해 주세요.</p>
         </div>
         <div class="grid2">
           <div class="field"><label class="req" for="gname">이름 또는 기관명</label><input id="gname" type="text" autocomplete="name"></div>
@@ -350,10 +356,11 @@ footer{font-family:var(--serif-en);font-size:16px;letter-spacing:.06em;color:var
         </div>
         <div class="field"><label for="gemail">이메일 <span class="hint">(선택)</span></label><input id="gemail" type="email" autocomplete="email"></div>
         <div class="field"><label for="gdetail">보내 주실 내용 <span class="hint">(품목·수량, 후원금이라면 입금자명과 금액)</span></label>
-          <textarea id="gdetail" rows="3" placeholder="예: 귤 80개 / 생수 100병 / 입금자명 홍길동 50,000원"></textarea></div>
+          <textarea id="gdetail" rows="3" placeholder="예: 어린이음료 80개, 베이커리 100개, 생수 100병 등"></textarea></div>
         <div class="field"><label for="gmsg">리틀산타에게 하고 싶은 말 <span class="hint">(선택)</span></label><textarea id="gmsg" rows="2"></textarea></div>
         <fieldset class="checks"><legend class="req">개인정보 수집·이용 동의</legend>
-          <label><input type="checkbox" id="gagree"> 후원 확인과 연락을 위해 이름(기관명), 연락처, 이메일을 수집하며 행사 종료 후 6개월 뒤 파기하는 데 동의합니다.</label>
+          <label><input type="checkbox" id="gagree"> 개인정보 수집·이용에 동의합니다.</label>
+          <p class="hint">수집 항목: 이름(기관명), 연락처, 이메일(선택), 후원 내용(품목·수량, 입금자명·금액), 남긴 말. 이용 목적: 후원 확인, 전달 방법 안내, 감사 인사. 보유 기간: 행사 종료 후 6개월 뒤 파기(다만 회계 증빙은 관련 법령이 정한 기간 동안 보관). 동의하지 않을 수 있으나, 동의하지 않으면 이 신청서로는 접수할 수 없으며 전화로 문의하실 수 있습니다.</p>
         </fieldset>
         <div aria-hidden="true" style="position:absolute;left:-9999px"><label for="gweb">웹사이트</label><input id="gweb" type="text" tabindex="-1" autocomplete="off"></div>
         <p class="err" id="gerr" role="alert" hidden></p>
@@ -362,7 +369,7 @@ footer{font-family:var(--serif-en);font-size:16px;letter-spacing:.06em;color:var
       <div class="done" id="gdone" hidden>
         <h3>응원이 접수되었습니다</h3>
         <div class="no" id="gdoneNo"></div>
-        <p>보내 주신 마음 고맙습니다. 확인한 뒤 남겨 주신 연락처로 전달 방법을 안내드릴게요.</p>
+        <p>보내 주신 마음 고맙습니다. 확인한 뒤 남겨 주신 연락처로 연락드릴게요.</p>
       </div>
     </div>
     <p class="hint">문의 010-4262-6107 · 인스타그램 @fabrictory</p>
@@ -383,7 +390,8 @@ const CFG = {
   eventDate: '2026년 12월 12일(토)',
   place: '서울 (확정 후 안내)',
   sessionTimes: { '1부': '11:00~13:00', '2부': '15:00~17:00' },
-  closeAt: '2026-10-30T23:59:00+09:00',   // 스텝 모집 마감 (Code.gs 와 같은 값)
+  closeAt: '2026-10-30T23:59:00+09:00',
+  supportCloseAt: '2026-12-12T23:59:00+09:00',   // 응원·후원 신청 마감 (Code.gs 와 같은 값)   // 스텝 모집 마감 (Code.gs 와 같은 값)
   trainingDates: [],        // 사전 교육 날짜가 정해지면 넣으세요. 예: ['11월 21일(토) 오전 10시 · 온라인']
   trainingNote: '온라인 (추후 일정 안내)',
   confirmDays: 3,           // 배정 안내 후 확정 회신 기한(일)
@@ -405,25 +413,25 @@ const CFG = {
   // 역할 이름을 바꾸면 Code.gs 의 roles 목록도 똑같이 바꿔 주세요.
   roles: [
     { id: 'mentor', name: '산타 멘토', tag: '리틀산타 관리·교육', when: '11월 준비 기간 ~ 행사 당일', f: '준비', where: '담당 존', need: '존마다 1명',
-      tasks: ['리틀산타 존마다 1명씩 배정되어 존을 맡기', '준비 과정과 메뉴판·포스터 만들기 등 부모님 문의를 담당 존의 산타 멘토가 안내', '행사 당일 존 담당 (자리 배치 및 운영)'],
+      tasks: ['리틀산타 존마다 1명씩 배정되어 존을 맡기', '준비 과정(메뉴판·포스터 만들기 등)에 대한 부모님 문의 안내', '행사 당일 존 담당 (자리 배치 및 운영)'],
       fit: '아이를 가르치거나 돌본 경험이 있는 분, 준비 기간에도 꾸준히 시간을 낼 수 있는 분' },
-    { id: 'craft', name: '꾸미기 엘프', tag: '왕관·모자 꾸미기 클래스 보조', when: '1부·2부 시작 전', f: '부', where: '꾸미기 클래스 공간', need: '부당 3~4명',
-      tasks: ['마켓이 열리기 전, 리틀산타들이 자기 왕관이나 모자를 꾸미는 클래스를 진행 강사와 함께 돕기', '재료와 도구를 미리 놓고 나눠 주기, 끝난 뒤 정리', '아이가 스스로 꾸밀 수 있게 거들기 (대신 만들어 주지 않기)', '가위·풀 등 도구를 안전하게 쓰는지 살피고, 꾸민 아이들을 오프닝 자리로 안내'],
+    { id: 'craft', name: '꾸미기 엘프', tag: '왕관·모자 꾸미기 클래스 보조', when: '1부·2부 (각 부 시작 전 꾸미기 클래스 포함)', f: '부', where: '꾸미기 클래스 공간', need: '부당 3~4명',
+      tasks: ['마켓이 열리기 전, 리틀산타들이 자기 왕관이나 모자를 꾸미는 클래스를 진행 강사와 함께 돕기', '재료와 도구를 미리 놓고 나눠 주기, 끝난 뒤 정리', '아이가 스스로 꾸밀 수 있게 거들기 (대신 만들어 주지 않기)', '가위·풀 등 도구를 안전하게 쓰는지 살피고, 꾸민 아이들을 각자 담당 존으로 안내', '클래스가 끝난 뒤에는 운영진이 정한 존이나 자리에서 행사를 함께 돕기'],
       fit: '만들기를 좋아하는 분, 아이들 미술·만들기 활동을 도와 본 경험이 있는 분' },
-    { id: 'welcome', name: '웰컴 산타', tag: '접수·티켓', when: '1부·2부', f: '부', where: '1층 인포', need: '부당 3명',
-      tasks: ['입장 티켓 확인과 현장 판매', '선물 사인카드(리틀산타 5명) 나눠 주며 이용 방법 안내', '셀러 아이·보호자 도착 확인 후 담당 존의 산타 멘토에게 연결'],
+    { id: 'welcome', name: '웰컴 산타', tag: '접수·안내', when: '1부·2부', f: '부', where: '입구 안내 데스크', need: '부당 3명',
+      tasks: ['선물 사인카드(리틀산타 5명) 나눠 주며 이용 방법 안내', '셀러 아이·보호자 도착 확인 후 담당 존의 산타 멘토에게 연결'],
       fit: '처음 오는 손님에게 밝게 설명하는 일이 편한 분' },
-    { id: 'guide', name: '길잡이 루돌프', tag: '동선 안내', when: '1부·2부', f: '부', where: '1·2층 계단, 출입구', need: '부당 2명',
-      tasks: ['층별 존 위치 안내, 계단 오르내림 정리', '붐비는 존 앞 줄 나누기, 한산한 존으로 손님 안내', '1부에서 2부로 바뀔 때 손님·셀러 이동 정리'],
+    { id: 'guide', name: '길잡이 루돌프', tag: '동선 안내', when: '1부·2부', f: '부', where: '출입구, 이동 동선', need: '부당 2명',
+      tasks: ['존 위치 안내, 이동 동선 정리', '붐비는 존 앞 줄 나누기, 한산한 존으로 손님 안내', '1부에서 2부로 바뀔 때 손님·셀러 이동 정리'],
       fit: '오래 서 있어도 괜찮고 공간 흐름을 잘 보는 분' },
-    { id: 'photo', name: '포토존 엘프', tag: '포토존', when: '1부·2부', f: '부', where: '1층 포토존', need: '부당 1명',
+    { id: 'photo', name: '포토존 엘프', tag: '포토존', when: '1부·2부', f: '부', where: '포토존', need: '부당 1명',
       tasks: ['손님 휴대폰으로 가족 사진 찍어 주기', '포토존 줄 관리, 소품 정리'],
       fit: '사진 찍어 주는 걸 좋아하는 분' },
-    { id: 'safety', name: '안전 지킴이', tag: '안전', when: '1부·2부', f: '부', where: '계단, 출입구, 스포츠존 주변', need: '부당 2명',
-      tasks: ['계단·출입구에서 뛰는 아이 살피기', '보호자를 잃은 아이가 생기면 인포로 연결하고 안내 요청', '응급처치 키트 위치를 익히고 다친 아이를 운영진에게 연결'],
+    { id: 'safety', name: '안전 지킴이', tag: '안전', when: '1부·2부', f: '부', where: '출입구와 혼잡한 구역', need: '부당 2명',
+      tasks: ['출입구·혼잡한 곳에서 뛰는 아이 살피기', '보호자를 잃은 아이가 생기면 인포로 연결하고 안내 요청', '응급처치 키트 위치를 익히고 다친 아이를 운영진에게 연결'],
       fit: '차분하고 상황 판단이 빠른 분, 응급처치 교육 이수자 환영' },
-    { id: 'record', name: '기록 엘프', tag: 'SNS 사진·영상', when: '1부·2부', f: '부', where: '1·2층 전체', need: '1~2명',
-      tasks: ['행사 공식 사진·영상은 사진작가님이 따로 촬영합니다', '기록 엘프는 SNS에 올릴 현장 사진과 짧은 영상을 휴대폰으로 찍습니다', '촬영 비동의 아동 목록을 받아 해당 아이는 얼굴이 나오지 않게 촬영', '촬영본은 당일 패브릭토리에 전달하고 개인 보관·게시하지 않기'],
+    { id: 'record', name: '기록 엘프', tag: 'SNS 사진·영상', when: '1부·2부', f: '부', where: '행사장 전체', need: '1~2명',
+      tasks: ['행사 공식 사진·영상은 사진작가님이 따로 촬영합니다', '기록 엘프는 SNS에 올릴 현장 사진과 짧은 영상을 휴대폰으로 찍습니다', '촬영 비동의 아동 목록을 받아 해당 아이는 얼굴이 나오지 않게 촬영', '촬영본은 당일 패브릭토리에 전달한 뒤 휴대폰과 클라우드(자동 백업 포함)에서 모두 삭제하고, 개인 보관·게시하지 않기'],
       fit: '휴대폰으로 사진·영상 찍기를 좋아하는 분, SNS용 짧은 영상에 익숙한 분' },
   ],
 
@@ -445,7 +453,7 @@ CFG.agreements = [
   { id: 'name', title: '기부는 아이들 이름으로만 합니다',
     body: '행사 수익은 리틀산타 아이들의 이름으로 기부됩니다. 기부 명단, 현수막, 홍보물에 스텝 개인 이름은 들어가지 않습니다.' },
   { id: 'training', title: '온라인 사전 교육에 참여하겠습니다',
-    body: '사전 교육에서 리틀산타 이야기, 아이를 대하는 원칙, 역할별 동선을 익힙니다. 교육에 참석하지 않으면 배정이 취소됩니다.' },
+    body: '사전 교육에서 리틀산타 이야기, 아이를 대하는 원칙, 역할별 동선을 익힙니다. 교육 일정은 배정 안내 때 미리 알려드리며, 참석이 어려우면 운영진과 대체 방법을 상의합니다. 연락 없이 참석하지 않으면 배정이 취소될 수 있습니다.' },
   { id: 'full', title: '행사 당일 정해진 시간 동안 끝까지 함께하겠습니다',
     body: '1부와 2부 모두 참여하며, 시작 30분 전에 도착하고, 중간에 자리를 비우거나 먼저 떠나지 않습니다. 아이들은 스텝이 있다는 전제로 자기 자리를 지킵니다.' },
   { id: 'confirm', title: '배정 안내를 받으면 ' + CFG.confirmDays + '일 안에 확정 회신합니다',
@@ -454,8 +462,6 @@ CFG.agreements = [
     body: '그래야 대기자를 배정하고 아이들 곁을 비우지 않을 수 있습니다. 연락 없이 불참하면 다음 회차 스텝 모집에서 제외됩니다.' },
   { id: 'photo', title: '행사 중 알게 된 아이들과 가족의 정보를 외부에 공유하지 않습니다',
     body: '행사 중 찍은 아이들 사진과 영상, 아이와 가족에 대해 알게 된 정보를 개인 SNS나 메신저에 올리거나 전하지 않습니다.' },
-  { id: 'record', title: '행사 기록용 사진·영상 촬영에 동의합니다',
-    body: '스텝 활동 모습이 행사 기록 사진과 영상에 담길 수 있습니다. 기록물은 리틀산타와 패브릭토리의 활동 소개에 쓰입니다.' },
   { id: 'privacy', title: '개인정보 수집·이용에 동의합니다',
     body: '수집 항목: 이름, 연락처, 이메일, 나이 구분, 거주 지역, 지원서에 쓴 내용. 이용 목적: 스텝 선정, 배정 안내, 사전 교육과 행사 당일 연락. 보유 기간: ' +
       CFG.dataRetention + ' 뒤 파기. 동의하지 않을 수 있으나, 동의하지 않으면 지원할 수 없습니다.' }
@@ -470,7 +476,7 @@ const facts = [];
 if (CFG.eventDate) facts.push(['행사', CFG.eventDate]);
 Object.keys(CFG.sessionTimes).forEach(k => { if (CFG.sessionTimes[k]) facts.push([k, CFG.sessionTimes[k]]); });
 if (CFG.place) facts.push(['장소', CFG.place]);
-if (CFG.closeAt) facts.push(['스텝 모집 마감', new Date(CFG.closeAt).toLocaleString('ko-KR', {month:'long', day:'numeric', weekday:'short', hour:'numeric', minute:'2-digit'})]);
+if (CFG.closeAt) facts.push(['스텝 모집 마감', new Date(CFG.closeAt).toLocaleString('ko-KR', {timeZone:'Asia/Seoul', month:'long', day:'numeric', weekday:'short', hour:'numeric', minute:'2-digit'})]);
 if (CFG.contact) facts.push(['문의', CFG.contact]);
 $('scheduleList').innerHTML = (CFG.schedule || []).map(r => '<li><b>' + esc(r[0]) + '</b><span>' + esc(r[1]) + '</span></li>').join('');
 $('contactLine').textContent = CFG.contact ? '궁금한 점은 ' + CFG.contact + '로 문의해 주세요.' : '';
@@ -543,9 +549,10 @@ function markInvalid(el, msg) {
   p.className = 'ferr'; p.textContent = msg;
   box.appendChild(p);
 }
-function clearInvalid() {
-  document.querySelectorAll('.invalid').forEach(x => x.classList.remove('invalid'));
-  document.querySelectorAll('.ferr').forEach(x => x.remove());
+function clearInvalid(root) {
+  root = root || document;
+  root.querySelectorAll('.invalid').forEach(x => x.classList.remove('invalid'));
+  root.querySelectorAll('.ferr').forEach(x => x.remove());
 }
 // 고치면 그 칸의 빨간 표시가 사라집니다.
 function clearOne(e) {
@@ -572,10 +579,11 @@ $('f').addEventListener('submit', e => {
     times: ($('both-ok').checked ? ['1부', '2부'] : []).concat(checked('setup')), setupCount: checked('setup').length, trainings: checked('training'), route: checked('route')[0] || '',
     motive: val('motive'), scenario: checked('scenario')[0] || '', skill: val('skill'), message: val('message'),
     agreedAll: Object.values(agreed).every(Boolean), agreedCount: Object.keys(agreed).length,
+    photoOk: $('photoOk').checked ? '동의' : '미동의',
     website: val('website')
   };
   // 빠진 항목 찾기: 칸마다 안내 문구를 붙이고, 첫 번째 칸으로 이동합니다.
-  clearInvalid();
+  clearInvalid($('f'));
   const fsOf = id => $(id).closest('fieldset');
   const problems = [];
   const need = (ok, el, msg) => { if (!ok) problems.push([el, msg]); };
@@ -584,6 +592,7 @@ $('f').addEventListener('submit', e => {
   need(/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email), $('email'), '이메일 주소를 확인해 주세요. 접수 확인 메일이 이 주소로 갑니다.');
   need(data.age, fsOf('age-ok'), '만 19세 이상인 분만 지원할 수 있습니다. 확인란에 체크해 주세요.');
   need(data.role1, $('r1'), '1지망 역할을 골라 주세요.');
+  need(!data.role2 || data.role2 !== data.role1, $('r2'), '2지망은 1지망과 다른 역할로 골라 주세요. 없으면 \'상관없음\'을 골라 주세요.');
   need($('both-ok').checked, fsOf('both-ok'), '1부와 2부 모두 참여하는 것이 스텝 지원 조건입니다. 확인란에 체크해 주세요.');
   need(data.setupCount > 0, fsOf('setupList'), '세팅과 철수 중 한 가지 이상을 꼭 골라 주세요.');
   if (CFG.trainingDates.length) need(data.trainings.length, $('trainingSet'), '참석할 수 있는 사전 교육 일정을 골라 주세요.');
@@ -626,13 +635,14 @@ $('f').addEventListener('submit', e => {
 });
 
 // 응원·후원 신청
+if (CFG.supportCloseAt && new Date() > new Date(CFG.supportCloseAt)) $('giveOpen').hidden = true;
 $('giveOpen').addEventListener('click', () => {
   const box = $('giveBox'), open = box.hidden;
   box.hidden = !open; $('giveOpen').setAttribute('aria-expanded', String(open));
   if (open) box.scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
 $('acctCopy').addEventListener('click', () => {
-  const num = '76230104274366', b = $('acctCopy');
+  const num = $('acctNum').textContent.replace(/\D/g, ''), b = $('acctCopy');
   const ok = () => { b.textContent = '복사했어요'; setTimeout(() => b.textContent = '계좌번호 복사', 1600); };
   if (navigator.clipboard) navigator.clipboard.writeText(num).then(ok, () => { b.textContent = num; });
   else b.textContent = num;
@@ -647,7 +657,7 @@ $('gf').addEventListener('submit', e => {
     items: [...document.querySelectorAll('input[name=gitem]:checked')].map(x => x.value),
     detail: val('gdetail'), message: val('gmsg'), agreed: $('gagree').checked, website: val('gweb')
   };
-  clearInvalid();
+  clearInvalid($('gf'));
   const problems = [];
   const need = (ok, el, msg) => { if (!ok) problems.push([el, msg]); };
   need(data.items.length, $('giveItems'), '지원해 주실 항목을 하나 이상 골라 주세요.');
