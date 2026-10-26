@@ -70,8 +70,12 @@ header{display:grid;gap:12px}
 @media (prefers-reduced-motion:reduce){.sky i,.sky b,.candles span::before{animation:none;opacity:.9}}
 .story .story-title::after{content:" ✦";color:var(--gold);font-size:.7em;vertical-align:.25em}
 .give{display:grid;gap:12px;border-radius:16px;padding:22px max(18px,4%);background:radial-gradient(90% 120% at 100% 0%,rgba(255,196,104,.22),transparent 60%),var(--card);border:1px solid var(--line)}
-.give ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px 18px}
-.give li::before{content:"✦ ";color:var(--gold)}
+.give .open{justify-self:start}
+.givebox{display:grid;gap:18px;border-top:1px solid var(--line);padding-top:18px}
+.givebox form{border-width:1px}
+.acct{display:grid;gap:4px;padding:14px 16px;border-radius:10px;background:var(--tint);border:1px solid var(--gold)}
+.acct .num{font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:.03em;color:var(--red)}
+.acct .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 footer .spark{color:var(--gold)}
 .facts{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:15px}
 .facts b{color:var(--red);font-weight:700;font-family:var(--display);margin-right:6px}
@@ -180,7 +184,7 @@ footer{font-family:var(--serif-en);font-size:16px;letter-spacing:.06em;color:var
       <p>“선물은 크게 두 가지가 있단다.<br>하나는 사람이 준 선물이고, 또 하나는 하늘이 준 ‘재능’이라는 선물이지.”</p>
       <cite>그림책 〈리틀산타〉 중에서</cite>
     </blockquote>
-    <p>그 사랑을 먼저 받은 우리는 이제 빛을 비추는 사람이 될 수 있습니다. 예수님은 등불을 숨겨 두지 말고 꺼내어, 그 빛이 사람 앞에 비치게 하라고 말씀하셨습니다(마태복음 5:15–16). 리틀산타 재능마켓은 아이들이 하늘이 준 재능을 꺼내 이웃에게 선물하는 ‘키즈셀러’가 되고, 어른들은 그 선물을 기쁘게 받는 손님이 되는 크리스마스 마켓입니다. 하늘이 준 재능을 숨기지 않고 꺼내 선물하는 순간, 아이들 한 명 한 명이 빛을 비추는 리틀산타가 됩니다.</p>
+    <p>리틀산타 재능마켓은 아이들이 하늘이 준 재능을 꺼내 이웃에게 선물하는 ‘키즈셀러’가 되고, 어른들은 그 선물을 기쁘게 받는 손님이 되는 크리스마스 마켓입니다. 그 재능을 꺼내 선물하는 순간, 아이들 한 명 한 명이 빛을 비추는 리틀산타가 됩니다.</p>
     <p>그래서 올해는 선물을 받는 크리스마스를 넘어, 받은 빛을 선물하는 크리스마스를 함께 만들고 싶습니다.</p>
     <p>처음 누군가에게 선물을 건네는 아이의 손은 조금 떨리기도 합니다. 그 작은 손이 끝까지 용기를 낼 수 있도록, 곁에서 기다려 주고 눈을 맞추며 응원해 줄 어른이 필요합니다.</p>
     <p class="invite">올해 크리스마스에는 리틀산타가 된 아이들의 산타가 되어 주시겠어요?</p>
@@ -326,13 +330,42 @@ footer{font-family:var(--serif-en);font-size:16px;letter-spacing:.06em;color:var
   <section class="give" id="support">
     <h2>리틀산타를 함께 응원하고 싶으신가요?</h2>
     <p>스텝으로 함께하기 어려워도, 물품이나 협찬으로 리틀산타를 응원하실 수 있습니다. 보내 주신 마음은 아이들이 재능을 선물하는 하루를 위해 소중히 쓰겠습니다.</p>
-    <ul>
-      <li>아이들 간식·음료</li>
-      <li>왕관·모자 꾸미기 재료</li>
-      <li>선물 포장 재료 (상자, 리본, 스티커 등)</li>
-      <li>조명·포토존 소품</li>
-    </ul>
-    <p class="hint">필요한 품목과 수량은 연락 주시면 안내드립니다. 문의 010-4262-6107 · 인스타그램 @fabrictory</p>
+    <button class="btn open" type="button" id="giveOpen" aria-expanded="false" aria-controls="giveBox">✦ 응원·후원 신청하기</button>
+    <div class="givebox" id="giveBox" hidden>
+      <form id="gf" novalidate>
+        <fieldset class="checks" id="giveItems"><legend class="req">무엇을 지원해 주시고 싶으신가요? <span class="hint">(여러 개 고를 수 있어요)</span></legend>
+          <label><input type="checkbox" name="gitem" value="아이들 간식·음료"> 아이들 간식·음료</label>
+          <label><input type="checkbox" name="gitem" value="스텝 간식·음료"> 스텝 간식·음료</label>
+          <label><input type="checkbox" name="gitem" value="리틀산타 선물"> 리틀산타 선물</label>
+          <label><input type="checkbox" name="gitem" value="후원금"> 후원금</label>
+        </fieldset>
+        <div class="acct">
+          <span class="hint">후원금 계좌</span>
+          <div class="row"><span class="num" id="acctNum">국민 76230104274366</span><button type="button" class="linkbtn" id="acctCopy">계좌번호 복사</button></div>
+          <span>예금주 패브릭토리(임한나)</span>
+        </div>
+        <div class="grid2">
+          <div class="field"><label class="req" for="gname">이름 또는 기관명</label><input id="gname" type="text" autocomplete="name"></div>
+          <div class="field"><label class="req" for="gphone">연락처</label><input id="gphone" type="tel" autocomplete="tel" placeholder="010-0000-0000"></div>
+        </div>
+        <div class="field"><label for="gemail">이메일 <span class="hint">(선택)</span></label><input id="gemail" type="email" autocomplete="email"></div>
+        <div class="field"><label for="gdetail">보내 주실 내용 <span class="hint">(품목·수량, 후원금이라면 입금자명과 금액)</span></label>
+          <textarea id="gdetail" rows="3" placeholder="예: 귤 80개 / 생수 100병 / 입금자명 홍길동 50,000원"></textarea></div>
+        <div class="field"><label for="gmsg">리틀산타에게 하고 싶은 말 <span class="hint">(선택)</span></label><textarea id="gmsg" rows="2"></textarea></div>
+        <fieldset class="checks"><legend class="req">개인정보 수집·이용 동의</legend>
+          <label><input type="checkbox" id="gagree"> 후원 확인과 연락을 위해 이름(기관명), 연락처, 이메일을 수집하며 행사 종료 후 6개월 뒤 파기하는 데 동의합니다.</label>
+        </fieldset>
+        <div aria-hidden="true" style="position:absolute;left:-9999px"><label for="gweb">웹사이트</label><input id="gweb" type="text" tabindex="-1" autocomplete="off"></div>
+        <p class="err" id="gerr" role="alert" hidden></p>
+        <button class="btn" type="submit" id="gsubmit">응원 보내기</button>
+      </form>
+      <div class="done" id="gdone" hidden>
+        <h3>응원이 접수되었습니다</h3>
+        <div class="no" id="gdoneNo"></div>
+        <p>보내 주신 마음 고맙습니다. 확인한 뒤 남겨 주신 연락처로 전달 방법을 안내드릴게요.</p>
+      </div>
+    </div>
+    <p class="hint">문의 010-4262-6107 · 인스타그램 @fabrictory</p>
   </section>
 
   <footer><span class="spark">✦</span> Let Your Light Shine! · 재능을 꺼내 선물하는 리틀산타 <span class="spark">✦</span></footer>
@@ -590,6 +623,58 @@ $('f').addEventListener('submit', e => {
       $('done').scrollIntoView({behavior:'smooth', block:'center'});
     })
     .catch(() => fail('접수 창구에 연결하지 못했습니다. 인터넷 연결을 확인하고 잠시 뒤 다시 시도해 주세요.'));
+});
+
+// 응원·후원 신청
+$('giveOpen').addEventListener('click', () => {
+  const box = $('giveBox'), open = box.hidden;
+  box.hidden = !open; $('giveOpen').setAttribute('aria-expanded', String(open));
+  if (open) box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+$('acctCopy').addEventListener('click', () => {
+  const num = '76230104274366', b = $('acctCopy');
+  const ok = () => { b.textContent = '복사했어요'; setTimeout(() => b.textContent = '계좌번호 복사', 1600); };
+  if (navigator.clipboard) navigator.clipboard.writeText(num).then(ok, () => { b.textContent = num; });
+  else b.textContent = num;
+});
+$('gf').addEventListener('input', clearOne);
+$('gf').addEventListener('change', clearOne);
+$('gf').addEventListener('submit', e => {
+  e.preventDefault();
+  const val = id => $(id).value.trim();
+  const data = {
+    type: 'support', name: val('gname'), phone: val('gphone'), email: val('gemail'),
+    items: [...document.querySelectorAll('input[name=gitem]:checked')].map(x => x.value),
+    detail: val('gdetail'), message: val('gmsg'), agreed: $('gagree').checked, website: val('gweb')
+  };
+  clearInvalid();
+  const problems = [];
+  const need = (ok, el, msg) => { if (!ok) problems.push([el, msg]); };
+  need(data.items.length, $('giveItems'), '지원해 주실 항목을 하나 이상 골라 주세요.');
+  need(data.name, $('gname'), '이름 또는 기관명을 적어 주세요.');
+  need(data.phone.replace(/\D/g, '').length >= 9, $('gphone'), '연락처를 010-0000-0000 형식으로 적어 주세요.');
+  need(!data.email || /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email), $('gemail'), '이메일 주소를 확인해 주세요.');
+  need(data.agreed, $('gagree').closest('fieldset'), '개인정보 수집·이용에 동의해 주세요.');
+  const err = $('gerr');
+  if (problems.length) {
+    problems.forEach(([el, msg]) => markInvalid(el, msg));
+    err.textContent = '확인이 필요한 항목이 ' + problems.length + '개 있습니다.'; err.hidden = false;
+    problems[0][0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+  err.hidden = true;
+  const btn = $('gsubmit'); btn.disabled = true; btn.textContent = '보내는 중…';
+  const fail = msg => { btn.disabled = false; btn.textContent = '응원 보내기'; err.textContent = msg; err.hidden = false; };
+  fetch(CFG.endpoint, { method: 'POST', body: JSON.stringify(data) })
+    .then(r => r.json())
+    .then(res => {
+      if (!res.ok) { fail((res.error || '보내지 못했습니다.') + ''); return; }
+      $('gf').hidden = true;
+      $('gdoneNo').textContent = '접수번호 ' + res.no;
+      $('gdone').hidden = false;
+      $('gdone').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    })
+    .catch(() => fail('접수 창구에 연결하지 못했습니다. 잠시 뒤 다시 시도하거나 ' + CFG.contact + '로 연락해 주세요.'));
 });
 </script>
 </body>
